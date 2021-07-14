@@ -1,0 +1,18 @@
+CREATE VIEW my_pals AS
+SELECT y.username, MAX(y.num)  AS counters FROM   
+(SELECT COUNT(username) AS num, username FROM Interests
+WHERE interest_name IN   
+(SELECT interest_name FROM Interests  
+WHERE username = 'tortsBsus')  
+AND username <> 'tortsBsus'  
+GROUP BY username) y
+GROUP BY username;
+
+SELECT * FROM my_pals;
+
+SELECT username FROM my_pals
+WHERE counters =
+(SELECT MAX(counters) FROM my_pals) 
+LIMIT 1;
+
+INSERT INTO Penpals (user1, user2) VALUES (X,Y);
