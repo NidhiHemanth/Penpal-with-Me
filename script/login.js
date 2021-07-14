@@ -28,7 +28,7 @@ function signup_validation(){
 
 	
 	if (name.length==0){
-		text="Please enter valid Name";
+		text="Please enter valid Username";
 		error_message.style.padding = "5px 10px";
 		error_message.innerHTML = text;
 		return false;
@@ -56,25 +56,19 @@ function signup_validation(){
 
 function login_validation(){
 
-	var emailid = document.getElementById("email2").value;
+	var username = document.getElementById("name2").value;
 	var error_message=document.getElementById("error_message_login");
 	var text;
 
-	if (emailid.length==0){
-		text="Please enter valid Email";
-		error_message.style.padding = "5px 10px";
-		error_message.innerHTML = text;
-		return false;
-	} else if (!(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(emailid)))
-	{
-		text="Please enter valid Email";
+	if (username.length==0){
+		text="Please enter valid Username";
 		error_message.style.padding = "5px 10px";
 		error_message.innerHTML = text;
 		return false;
 	} else{
 		return true;
 	}
-}
+} 
 
 function reset_validation(){
 
@@ -86,7 +80,7 @@ function reset_validation(){
 
 	if (document.getElementById("name3").value.length == 0)
 	{
-		text="Please enter a valid Name";
+		text="Please enter a valid Username";
 		document.getElementById("name3").classList.add('red_box');
 		error_message.style.padding = "5px 10px";
 		error_message.innerHTML = text;

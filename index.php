@@ -1,12 +1,3 @@
-<?php 
-    session_start();
-
-    if(isset($_SESSION['logged_in'])) {
-        header('Location: http://localhost/PHPfiles/PenPals/home.php');
-        exit;
-    }
-?>
-
 <!DOCTYPE html>
 <head>
     <title>Login / Sign Up</title>
@@ -55,7 +46,7 @@
                 <span>or use your account</span>
 
                 <div id="error_message_login"></div>
-                <input type="email" placeholder="Email" name="email2" id="email2" required/>
+                <input type="text" placeholder="Username" name="name2" id="name2" required/>
                 <input type="password" placeholder="Password" name="pw2" id="pw2" required/>
                 <div class="inline-fields">
                     <input type="checkbox" name="remember" id="rem">
@@ -134,7 +125,8 @@
                         <input type="email" placeholder="Email" name="email3" id="email3" required/>
                         <input type="password" placeholder="New Password" name="pw3" id="pw3" required/>
                         <input type="password" placeholder="Confirm Password" name="pw4" id="pw4" required/>
-                        <button type="submit" class="btn btn-primary" id="addConfirm" onclick="return reset_validation()" style="outline:none">Confirm</button>
+                        <button type="submit" class="btn btn-primary" id="addConfirm" style="outline:none">Confirm</button>
+                        <!-- <button type="submit" class="btn btn-primary" id="addConfirm" onclick="return reset_validation()" style="outline:none">Confirm</button> -->
                     </form>
                 </div>
                 <div class="modal-footer">
@@ -144,6 +136,6 @@
         </div>
     </div>
 
-    <script src="./script/login.js"></script>
+    <!-- <script src="./script/login.js"></script> -->
 </body>
 </html>

@@ -4,7 +4,7 @@
     $servername = "localhost";
     $username = "root";
     $password = "";
-    $dbname = "penpals";
+    $dbname = "DBMS";
 
     // FirstName, LastName, email, phoneNo, date, message
     $name = $_POST["name3"];
@@ -18,11 +18,11 @@
         die("Connection failed: " . $conn->connect_error);
     }
 
-    $sql = "SELECT * FROM UserLog where Email = '$email' && Name = '$name'";
+    $sql = "SELECT * FROM Users where email = '$email' && username = '$name'";
     $result = $conn->query($sql);
 
     if (mysqli_num_rows($result) > 0) {    
-        $sql = "UPDATE `UserLog` SET `Password`='$new_pw' WHERE Email = '$email' && Name = '$name'";
+        $sql = "UPDATE `Users` SET `password`='$new_pw' WHERE email = '$email' && username = '$name'";
         $conn->query($sql);
     } 
 

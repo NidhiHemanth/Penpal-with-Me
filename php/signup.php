@@ -4,7 +4,7 @@
     $servername = "localhost";
     $username = "root";
     $password = "";
-    $dbname = "penpals";
+    $dbname = "DBMS";
 
     // FirstName, LastName, email, phoneNo, date, message
     $name = $_POST["name1"];
@@ -18,12 +18,12 @@
         die("Connection failed: " . $conn->connect_error);
     }
 
-    $sql = "SELECT * FROM `UserLog` where Email = '$email'";
+    $sql = "SELECT * FROM `Users` where email = '$email'";
     $result = $conn->query($sql);
 
     if (mysqli_num_rows($result) == 0) {
 
-        $sql = "INSERT INTO `UserLog` (`Name`,`Email`,`Password`) VALUES ('$name','$email','$pw')";
+        $sql = "INSERT INTO `Users` (`username`,`email`,`password`) VALUES ('$name','$email','$pw')";
     
         if ($conn->query($sql) === TRUE) {
             $_SESSION['logged_in'] = 1;
