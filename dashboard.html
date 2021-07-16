@@ -30,7 +30,7 @@
                         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
                             View More
                         </button>
-                        <button type="button" class="btn btn-danger">Delete Penpal</button>
+                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Delete Penpal</button>
                         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog modal-fullscreen">
                                 <div class="modal-content">
@@ -38,76 +38,54 @@
                                         <h5 class="modal-title" id="exampleModalLabel">PenPal username</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
-                                    <div class="modal-body">
-                                        PenPal description
+                                    <div class="container">
+                                        <div class="row d-flex justify-content-center">
+                                            <div class="col-md-5">
+                                                <div class="modal-body">
+                                                    <!-- PenPal description -->
+                                                    <h3>Send a message to {username}</h3>
+                                                    <div class="mb-3">
+                                                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                                    </div>
+                                                </div>    
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="container">
+                                        <div class="row d-flex justify-content-center">
+                                            <div class="col-md-5">
+                                                <div class="msg-body">
+                                                    <h5>Last message</h5>
+                                                    <div>{message}</div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                        <button type="button" class="btn btn-primary">Dashboard</button>
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Back to Dashboard</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                  </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card">
-                    <h5 class="card-header">PenPal #</h5>
-                    <div class="card-body">
-                      <h5 class="card-title">Username #</h5>
-                      <p class="card-text">{ description }</p>
-                      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                        View More
-                      </button>
-                      <button type="button" class="btn btn-danger">Delete Penpal</button>
-                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-fullscreen">
-                            <div class="modal-content">
+                        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                              <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">PenPal username</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                  <h5 class="modal-title" id="staticBackdropLabel">Confirm deletion of Penpal #</h5>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
-                                    PenPal description
+                                    <h5>Are you sure you want to remove {username}</h5>
+                                    <label for="confirmDeletePassword" class="form-label">Enter Password for confirmation</label>
+                                    <input type="password" id="confirmDeletePassword" class="form-control" aria-describedby="passwordHelpBlock">
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary">Dashboard</button>
+                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">I changed my mind</button>
+                                  <button type="button" class="btn btn-primary">Yes, I'm sure</button>
                                 </div>
+                              </div>
                             </div>
                         </div>
-                    </div>
-                    </div>
-                  </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card">
-                    <h5 class="card-header">PenPal #</h5>
-                    <div class="card-body">
-                      <h5 class="card-title">Username #</h5>
-                      <p class="card-text">{ description }</p>
-                      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                        View More
-                      </button>
-                      <button type="button" class="btn btn-danger">Delete Penpal</button>
-                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-fullscreen">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">PenPal username</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    PenPal description
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary">Dashboard</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                     </div>
                   </div>
             </div>

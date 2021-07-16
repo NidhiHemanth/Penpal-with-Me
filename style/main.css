@@ -29,3 +29,26 @@ div.new-penpal {
 .card {
     margin: 1rem;
 }
+
+.modal-content {
+    height: 100%;
+    border-radius: 0;
+    position: relative;
+}
+
+.modal-footer {
+    border-radius: 0;
+    bottom: 0px;
+    position: absolute;
+    width: 100%;
+}
+
+.msg-body {
+    background-color: #e4dcdc;
+    padding: 2rem;
+}
+
+.container-penpal {
+    display:flex;
+    align-items:center;
+}
