@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <head>
     <title>Login / Sign Up</title>
-    <link rel="icon" href="images/icon2.png" type="image/x-icon" />
+    <link rel="icon" href="./assets/icon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -10,7 +10,7 @@
 </head>
 <body>
     <h1 id="logo">Pen-Pals</h1>
-    <h3 id="slogan"> ~ Feel loved ~ </h3>
+    <h3 id="slogan"> ~ Make new friends ~ </h3>
 
     <div class="container-own" id="container-own">
         <div class="form-container sign-up-container">
@@ -136,6 +136,6 @@
         </div>
     </div>
 
-    <!-- <script src="./script/login.js"></script> -->
+    <script src="./script/login.js"></script>
 </body>
 </html>

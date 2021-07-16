@@ -20,7 +20,7 @@ $(document).ready(function () {
 });
 
 function signup_validation(){
-	var name=document.getElementById("name").value;
+	var name = document.getElementById("name").value;
 	var email = document.getElementById("email").value;
 	var password = document.getElementById("password").value;
 	var error_message=document.getElementById("error_message");

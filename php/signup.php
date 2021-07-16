@@ -30,13 +30,18 @@
             $_SESSION['username'] = $name;
             $_SESSION['user_email'] = $email;
             $_SESSION['user_pw'] = $password;
-
-            header('Location: http://localhost/PHPfiles/PenPals/home.php');
-            exit;
         } 
-
-    }
+        
+        $sql = "INSERT INTO `Interests` (`username`) VALUES ('$name')";
+        $result = $conn->query($sql);
     
+        $sql = "INSERT INTO `Languages` (`username`) VALUES ('$name')";
+        $result = $conn->query($sql);
+
+        header('Location: http://localhost/PHPfiles/PenPals/home.php');
+        exit;
+    }
+
     header('Location: http://localhost/PHPfiles/PenPals/index.php');
     exit;
 
