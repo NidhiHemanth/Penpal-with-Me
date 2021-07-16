@@ -30,13 +30,13 @@ div.new-penpal {
     margin: 1rem;
 }
 
-.modal-content {
+.modal-content-message {
     height: 100%;
     border-radius: 0;
     position: relative;
 }
 
-.modal-footer {
+.modal-footer-message {
     border-radius: 0;
     bottom: 0px;
     position: absolute;
@@ -51,4 +51,10 @@ div.new-penpal {
 .container-penpal {
     display:flex;
     align-items:center;
+}
+
+.setting {
+    position: absolute;
+    right: 10px;
+    top: 10px;
 }
