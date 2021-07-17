@@ -47,7 +47,7 @@
         } 
     
         // echo "Success";
-        header('Location: http://localhost/PHPfiles/PenPals/home.php');
+        header('Location: http://localhost/PHPfiles/PenPals/dashboard.php');
         exit;
     } 
 
