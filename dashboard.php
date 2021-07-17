@@ -52,8 +52,8 @@
     <div class="row">
     <div class="col-sm-10 col-md-6 col-lg-4">
     <?php 
-            $i = 1;
-            while($i <= 3) {
+            $i = 1; error_reporting(0);
+            while($i<= $_SESSION['pal_'.$i]) {
                 echo '                        <div class="card">
                             <h5 class="card-header">'; echo "Penpal ".$i;echo '</h5>
                             <div class="card-body"> <h5 class="card-title">';echo $_SESSION['pal_'.$i].' ';echo ' </h5>
