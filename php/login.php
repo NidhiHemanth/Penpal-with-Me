@@ -1,7 +1,7 @@
 <?php
     session_start();
 
-    $servername = "localhost";
+    $servername = "localhost:3307";
     $username = "root";
     $password = "";
     $dbname = "DBMS";
@@ -34,13 +34,14 @@
             echo "Cookies Set Successfuly";
         }
 
-        $sql = "SELECT * FROM Penpals where user1 = '$name'";
+        $sql = "SELECT * FROM Penpals where user1 = '$name' or user2 = '$name'";
         $result = $conn->query($sql);
     
         if (mysqli_num_rows($result) > 0) {    
             $i = 1;
             while($row = $result->fetch_assoc()) {
-                $_SESSION['pal_'.$i] = $row["user2"];
+                if($row["user2"]<>$name) $_SESSION['pal_'.$i] = $row["user2"];
+                    else $_SESSION['pal_'.$i] = $row["user1"];
                 $i++;
             }
         } 

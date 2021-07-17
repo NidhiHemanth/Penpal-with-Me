@@ -2,7 +2,7 @@
     session_start();
 
     if(!isset($_SESSION['logged_in'])) {
-        header('Location: http://localhost/PHPfiles/WEB/index.php');
+        header('Location: http://localhost/PHPfiles/PenPals/index.php');
         exit;
     }
 ?>
