@@ -4,5 +4,5 @@ DROP TABLE Interests;
 DROP TABLE Languages;
 DROP TABLE Users;
 
-DROP TABLE interest_pals;
-DROP TABLE lang_pals;
+DROP VIEW interest_pals;
+DROP VIEW lang_pals;

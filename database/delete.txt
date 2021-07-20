@@ -1,0 +1,4 @@
+DELETE FROM Penpals
+WHERE 
+user1 = 'tortsBsus' AND
+user2 = 'username';
