@@ -1,5 +1,9 @@
 SELECT * FROM Messages;
+SELECT * FROM Route;
 SELECT * FROM Penpals;
 SELECT * FROM Interests;
 SELECT * FROM Languages;
 SELECT * FROM Users;
+
+SELECT * FROM my_pals;
+SELECT * FROM potentials;

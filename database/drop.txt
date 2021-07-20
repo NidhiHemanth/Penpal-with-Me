@@ -1,8 +1,9 @@
 DROP TABLE Messages;
+DROP TABLE Route;
 DROP TABLE Penpals;
 DROP TABLE Interests;
 DROP TABLE Languages;
 DROP TABLE Users;
 
-DROP VIEW interest_pals;
-DROP VIEW lang_pals;
+DROP VIEW my_pals;
+DROP VIEW potentials;

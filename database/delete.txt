@@ -1,4 +1,7 @@
 DELETE FROM Penpals
 WHERE 
-user1 = 'tortsBsus' AND
-user2 = 'username';
+    (SELECT pen_id FROM Penpals WHERE 
+        (user1 = 'tortsBsus' OR user2 = 'tortsBsus')
+        AND
+        (user1 = 'psych' OR user2 = 'psych')
+    );
