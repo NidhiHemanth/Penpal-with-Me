@@ -25,7 +25,7 @@
                 <span>or use your email for registration</span>
                 
                 <div id="error_message"></div>
-                <input type="text" placeholder="Name" name="name1" id="name" required/>
+                <input type="text" placeholder="Name" name="name" id="name" required/>
                 <input type="email" placeholder="Email" name="email1" id="email" required/>
                 <input type="password" placeholder="Password" name="pw1" id="password" required/>
                 <button type="submit" onclick="return signup_validation()">Sign Up</button>
@@ -46,7 +46,7 @@
                 <span>or use your account</span>
 
                 <div id="error_message_login"></div>
-                <input type="text" placeholder="Username" name="name2" id="name2" required/>
+                <input type="text" placeholder="Username" name="email2" id="email2" required/>
                 <input type="password" placeholder="Password" name="pw2" id="pw2" required/>
                 <div class="inline-fields">
                     <input type="checkbox" name="remember" id="rem">
@@ -61,7 +61,6 @@
         <div class="overlay-container">
             <div class="overlay">
                 <div class="overlay-panel overlay-left">
-    
                     <h1>Welcome Back!</h1>
                     <p>To keep connected with us please login with your personal info</p>
                     <button class="ghost" id="signIn">Sign In</button>

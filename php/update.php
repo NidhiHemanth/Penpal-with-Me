@@ -1,7 +1,7 @@
 <?php
     session_start();
 
-    $servername = "localhost:3307";
+    $servername = "localhost";
     $username = "root";
     $password = "";
     $dbname = "DBMS";
@@ -18,11 +18,11 @@
         die("Connection failed: " . $conn->connect_error);
     }
 
-    $sql = "SELECT * FROM Users where email = '$email' && username = '$name'";
+    $sql = "SELECT * FROM Users where email = '$email' && name = '$name'";
     $result = $conn->query($sql);
 
     if (mysqli_num_rows($result) > 0) {    
-        $sql = "UPDATE `Users` SET `password`='$new_pw' WHERE email = '$email' && username = '$name'";
+        $sql = "UPDATE `Users` SET `password`='$new_pw' WHERE email = '$email' && name = '$name'";
         $conn->query($sql);
     } 
 

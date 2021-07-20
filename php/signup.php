@@ -1,13 +1,13 @@
 <?php
     session_start();
 
-    $servername = "localhost:3307";
+    $servername = "localhost";
     $username = "root";
     $password = "";
     $dbname = "DBMS";
 
-    // FirstName, LastName, email, phoneNo, date, message
-    $name = $_POST["name1"];
+    // name, email, password
+    $name = $_POST["name"];
     $email = $_POST["email1"];
     $pw = $_POST["pw1"];
     
@@ -23,23 +23,23 @@
 
     if (mysqli_num_rows($result) == 0) {
 
-        $sql = "INSERT INTO `Users` (`username`,`email`,`password`) VALUES ('$name','$email','$pw')";
+        $sql = "INSERT INTO `Users` (`name`,`email`,`password`) VALUES ('$name','$email','$pw')";
     
         if ($conn->query($sql) === TRUE) {
             $_SESSION['logged_in'] = 1;
             $_SESSION['username'] = $name;
-            $_SESSION['user_email'] = $email;
+            $_SESSION['email'] = $email;
             $_SESSION['user_pw'] = $password;
         } 
         
-        $sql = "INSERT INTO `Interests` (`username`) VALUES ('$name')";
+        $sql = "INSERT INTO `Interests` (`email`) VALUES ('$email')";
         $result = $conn->query($sql);
     
-        $sql = "INSERT INTO `Languages` (`username`) VALUES ('$name')";
+        $sql = "INSERT INTO `Languages` (`email`) VALUES ('$email')";
         $result = $conn->query($sql);
 
-        header('Location: http://localhost/PHPfiles/PenPals/home.php');
-        exit;
+        // header('Location: http://localhost/PHPfiles/PenPals/home.php');
+        // exit;
     }
 
     header('Location: http://localhost/PHPfiles/PenPals/index.php');
