@@ -1,24 +1,26 @@
 CREATE TABLE Users (
-    username VARCHAR(50) NOT NULL,
-    email VARCHAR(50),
+    email VARCHAR(50) NOT NULL,
+    name VARCHAR(50),
     password VARCHAR(50),
-    PRIMARY KEY (username) 
+    PRIMARY KEY (email) 
 ); 
 
 CREATE TABLE Interests(
-    username VARCHAR(50) NOT NULL, 
+    email VARCHAR(50) NOT NULL, 
     interest_name VARCHAR(50) DEFAULT 'Random',
-    PRIMARY KEY (username, interest_name),
-    FOREIGN KEY (username) REFERENCES Users (username)
+    PRIMARY KEY (email, interest_name),
+    FOREIGN KEY (email) REFERENCES Users (email)
     ON DELETE CASCADE
+    ON UPDATE CASCADE
 );
 
 CREATE TABLE Languages (
-    username VARCHAR(50) NOT NULL,
+    email VARCHAR(50) NOT NULL,
     language VARCHAR(50) DEFAULT 'English',
-    PRIMARY KEY (username, language),
-    FOREIGN KEY (username) REFERENCES Users (username)
+    PRIMARY KEY (email, language),
+    FOREIGN KEY (email) REFERENCES Users (email)
     ON DELETE CASCADE
+    ON UPDATE CASCADE
 ); 
 
 CREATE TABLE Penpals (
@@ -26,18 +28,29 @@ CREATE TABLE Penpals (
     user1 VARCHAR(50) NOT NULL,
     user2 VARCHAR(50) NOT NULL,
     PRIMARY KEY (pen_id),
-    FOREIGN KEY (user1) REFERENCES Users (username),
-    FOREIGN KEY (user2) REFERENCES Users (username)
+    FOREIGN KEY (user1) REFERENCES Users (email),
+    FOREIGN KEY (user2) REFERENCES Users (email)
     ON DELETE CASCADE
+    ON UPDATE CASCADE
+); 
+
+CREATE TABLE Route (
+    route INT NOT NULL AUTO_INCREMENT,
+    pen_id INT NOT NULL,
+    sender VARCHAR(50),
+    PRIMARY KEY (route),
+    FOREIGN KEY (pen_id) REFERENCES Penpals (pen_id),
+    FOREIGN KEY (sender) REFERENCES Users (email)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
 ); 
 
 CREATE TABLE Messages (
-    message_id  INT NOT NULL AUTO_INCREMENT,
-    pen_id INT NOT NULL,
-    content VARCHAR(50),
-    sender VARCHAR(50),
     whens DATETIME DEFAULT CURRENT_TIMESTAMP,  
-    PRIMARY KEY (message_id),
-    FOREIGN KEY (pen_id) REFERENCES Penpals (pen_id)
+    route INT NOT NULL,
+    content TEXT(1000),
+    PRIMARY KEY (route, whens),
+    FOREIGN KEY (route) REFERENCES Route (route)
     ON DELETE CASCADE
+    ON UPDATE CASCADE
 ); 
