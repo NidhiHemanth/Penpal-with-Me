@@ -1,0 +1,11 @@
+# for interests table 
+
+UPDATE TABLE Interests 
+SET interest_name = "gaming" 
+WHERE username = "iamfunny";
+
+# for languages table 
+
+UPDATE TABLE Languages 
+SET language = "Spanish" 
+WHERE username = "iamfunny";

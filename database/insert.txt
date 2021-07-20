@@ -1,16 +1,30 @@
-INSERT INTO Users values('tortsBsus', 'meganraj251@gmail.com','abc123');
-INSERT INTO Users values('lemone515', 'meghanarathanraj.is19@bmsce.ac.in','abcd1234');
-INSERT INTO Users values('NidhiHemanth', 'nidhih.is19@bmsce.ac.in','abcd1234');
+INSERT INTO Users VALUES
+('psych', 'maniac@psycho.com','psych'),
+('tortsBsus', 'meganraj251@gmail.com','abc123'),
+('lemone515', 'meghanarathanraj.is19@bmsce.ac.in','abcd1234'),
+('iamfunny', 'fun@private.ltd','idk'),
+('whoami', 'lmao@gmail.com','lmaoo'),
+('NidhiHemanth', 'nidhih.is19@bmsce.ac.in','abcd1234');
 
-INSERT INTO Interests(username) values('tortsBsus');
-INSERT INTO Interests(username) values('lemone515');
-INSERT INTO Interests(username) values('NidhiHemanth');
+INSERT INTO Interests(username) VALUES
+('psych'),
+('tortsBsus'),
+('lemone515'),
+('iamfunny'),
+('whoami'),
+('NidhiHemanth');
 
-INSERT INTO Languages(username) values('tortsBsus');
-INSERT INTO Languages(username) values('lemone515');
-INSERT INTO Languages(username) values('NidhiHemanth');
+INSERT INTO Languages(username) VALUES
+('psych'),
+('tortsBsus'),
+('lemone515'),
+('iamfunny'),
+('whoami'),
+('NidhiHemanth');
 
-INSERT INTO Penpals(user1,user2) values('tortsBsus', 'NidhiHemanth');
+INSERT INTO Penpals(user1,user2) VALUES
+('tortsBsus', 'NidhiHemanth');
 
-INSERT INTO Messages(pen_id,content,sender) values(1, 'Hewwo World!','tortsBsus');
-INSERT INTO Messages(pen_id,content,sender) values(1, 'No you','NidhiHemanth');
+INSERT INTO Messages(pen_id,content,sender) VALUES
+(1, 'Hewwo World!','tortsBsus'),
+(1, 'No you','NidhiHemanth');

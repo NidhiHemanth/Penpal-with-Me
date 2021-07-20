@@ -1,18 +1,46 @@
-CREATE VIEW my_pals AS
-SELECT y.username, MAX(y.num)  AS counters FROM   
+CREATE VIEW interest_pals AS
+SELECT y.username, MAX(y.num)-1 AS counters FROM   
 (SELECT COUNT(username) AS num, username FROM Interests
 WHERE interest_name IN   
 (SELECT interest_name FROM Interests  
 WHERE username = 'tortsBsus')  
 AND username <> 'tortsBsus'  
 GROUP BY username) y
-GROUP BY username;
+GROUP BY username
+HAVING MAX(y.num) != 1
+ORDER BY counters DESC;
 
-SELECT * FROM my_pals;
+SELECT * FROM interest_pals;
 
-SELECT username FROM my_pals
+CREATE VIEW lang_pals AS
+SELECT y.username, MAX(y.num)-1 AS counters FROM   
+(SELECT COUNT(username) AS num, username FROM Languages
+WHERE language IN   
+(SELECT language FROM Languages  
+WHERE username = 'tortsBsus')  
+AND username <> 'tortsBsus'  
+GROUP BY username) y
+GROUP BY username
+HAVING MAX(y.num) != 1
+ORDER BY counters DESC;
+
+SELECT * FROM lang_pals;
+
+SELECT lang_pals.username FROM 
+interest_pals JOIN lang_pals
+ON interest_pals.username = lang_pals.username
+LIMIT 1;
+
+# -----------------------------------
+
+SELECT username FROM interest_pals
 WHERE counters =
-(SELECT MAX(counters) FROM my_pals) 
+(SELECT MAX(counters) FROM interest_pals) 
+LIMIT 1;
+
+SELECT username FROM lang_pals
+WHERE counters =
+(SELECT MAX(counters) FROM lang_pals) 
 LIMIT 1;
 
 INSERT INTO Penpals (user1, user2) VALUES (X,Y);

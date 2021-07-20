@@ -1,0 +1,28 @@
+INSERT INTO Interests VALUES
+('tortsBsus','gaming'),
+('tortsBsus','knit'),
+('tortsBsus','draw'),
+('psych','draw'),
+('psych','knit'),
+('lemone515','draw'),
+('lemone515','sing'),
+('iamfunny','paint'),
+('iamfunny','knit'),
+('iamfunny','gaming'),
+('whoami','draw'),
+('NidhiHemanth','gaming');
+
+INSERT INTO Languages VALUES
+('tortsBsus','Japanese'),
+('tortsBsus','Chinese'),
+('tortsBsus','Korean'),
+('psych','Chinese'),
+('psych','Japanese'),
+('lemone515','Japanese'),
+('iamfunny','Korean'),
+('iamfunny','Hindi'),
+('whoami','Arabic'),
+('whoami','Russian'),
+('whoami','French'),
+('NidhiHemanth','French'),
+('NidhiHemanth','Hindi');
