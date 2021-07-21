@@ -139,8 +139,8 @@
                 </div>
                 <div class="modal-footer justify-content-between">
                     <button type="button" class="btn btn-primary">Save changes</button>
-                    <a type="button" class="btn btn-secondary" href="./php/logout.php">Log Out</a>
-                    <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
+                    <button type="button" class="btn btn-secondary" href="./php/logout.php">Log Out</button>
+                 
                 </div>
               </div>
             </div>
@@ -154,13 +154,26 @@
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio exercitationem odit alias necessitatibus placeat repellendus tempora laborum facere inventore quaerat dicta officiis consequatur, sunt nostrum, amet nam corporis veniam! Voluptate.
                 </div>
                 <button type="button" class="btn btn-secondary btn-lg">Get a PenPal</button>
+            
             </div>
         </div>
     </div>
     <div class="container">
     <div class="row">
-        <?php 
-            $i = 1; error_reporting(0);
+        <?php error_reporting(0);
+          $servername = "localhost:3307";
+          $username = "root";
+          $password = "";
+          $dbname = "DBMS";
+      
+          // Create connection
+          $conn = new mysqli($servername, $username, $password, $dbname);
+          // Check connection
+          if ($conn->connect_error) {
+              die("Connection failed: " . $conn->connect_error);
+          }                
+       
+            $i = 1; 
             while($i<= $_SESSION['pal_'.$i]) {
                 echo '     
                     <div class="col-sm-10 col-md-6 col-lg-4">                   
@@ -168,11 +181,9 @@
                             <h5 class="card-header">'; echo "Penpal ".$i;echo '</h5>
                             <div class="card-body"> 
                                 <h5 class="card-title">';echo $_SESSION['pal_'.$i].' '; echo ' </h5>
-<<<<<<< Updated upstream
-                                <p class="card-text">{ description }</p>
-=======
                                 <p class="card-text">
                                 ';
+                                
                                 $sql = "select pen_id from Penpals where (user1 = '".$_SESSION['email']."' AND user2 = '".$_SESSION['pal_'.$i]."') OR (user2 = '".$_SESSION['username']."' AND user1 = '".$_SESSION['pal_'.$i]."');";
                                 
                                 $result = $conn->query($sql);
@@ -241,7 +252,6 @@
                                 }else echo"NOPE";
 
                 echo '</p>
->>>>>>> Stashed changes
                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#messageModal'.$i.'">
                                     Send Message!
                                 </button>
@@ -324,6 +334,8 @@
             </div>
         </div> 
     </div>
+
+
    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
