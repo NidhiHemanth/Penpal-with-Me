@@ -187,11 +187,12 @@
    
     <div class="container">
     <div class="row">
-        <?php 
+        <?php error_reporting(0);
            
-            $i = 1; error_reporting(0); 
+            $i = 1; 
             
-            while($i<=$_SESSION['numOfPenpals']) {
+            while($i<=$_SESSION['numOfPenpals']) 
+            {
                 echo '     
                     <div class="col-sm-10 col-md-6 col-lg-4">                   
                         <div class="card">
@@ -200,7 +201,9 @@
                                 <h5 class="card-title">';
                                 $sql = "select name from Users where email = '".$_SESSION['pal_'.$i]."'";
                                 $result=$conn->query($sql);
-                                $row = $result->fetch_assoc();                                
+                                $row = $result->fetch_assoc();
+                                $_SESSION['pal_name'.$i] = $row['name'];
+                                                              
                                 echo $row['name'].' ';
                                 echo ' </h5>
                                 <p class="card-text">
@@ -285,7 +288,7 @@
                                         <div class="modal-content modal-content-message">
                                             <div class="modal-header">
                                                 <h5 class="modal-title" id="messageModalLabel'.$i.'"> ';
-                                                    echo $_SESSION['pal_name_'.$i].' ';
+                                                    echo $_SESSION['pal_name'.$i] .' ';
                                                     echo '
                                                 </h5>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -296,21 +299,30 @@
                                                         <div class="modal-body">
                                                             <!-- PenPal description -->
                                                             <h3>Send a message to  ';
-                                                                echo $_SESSION['pal_name_'.$i].' ';
+                                                                echo $_SESSION['pal_name'.$i].' ';
                                                                 echo '
                                                             </h3>
                                                             <div class="mb-3">
-                                                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                                                            </div>
+                                                            <form method="GET" action="./php/SendMessage.php">
+                                                             <textarea name ="Message" class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
+                                                             <button type="submit" class="btn btn-outline-secondary" name = "Sends" value = "';
+                                                             echo $_SESSION['pal_'.$i];
+                                                      echo '">Send it!</button>
+                                                             </form>
+                                                             </div>
+                                                          
+                                                             </div>
                                                         </div>    
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div>';
+                                            echo'
                                             <div class="container">
                                                 <div class="row d-flex justify-content-center">
                                                     <div class="col-md-5">
                                                         <div class="msg-body">
                                                             <h5>';
+                                                            
                                                             $sql = "select content from (select Max(whens) AS time ,content from Messages where route = (
                                                               select route from Route where sender ='".$_SESSION['email']."' AND pen_id = ".$pen_id."
                                                                                                                               )
@@ -333,7 +345,9 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            
                                             <div class="modal-footer modal-footer-message">
+                                            
                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Back to Dashboard</button>
                                             </div>
                                         </div>
@@ -384,7 +398,7 @@
     </div>
 
 
-   
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
