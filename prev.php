@@ -154,96 +154,22 @@
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio exercitationem odit alias necessitatibus placeat repellendus tempora laborum facere inventore quaerat dicta officiis consequatur, sunt nostrum, amet nam corporis veniam! Voluptate.
                 </div>
                 <button type="button" class="btn btn-secondary btn-lg">Get a PenPal</button>
+                <div class="new-penpal">username?</div>
             </div>
         </div>
     </div>
     <div class="container">
     <div class="row">
         <?php 
-            $i = 1; 
-            error_reporting(0);
-            while($i <= $_SESSION['pal_'.$i]) {
+            $i = 1; error_reporting(0);
+            while($i<= $_SESSION['pal_'.$i]) {
                 echo '     
                     <div class="col-sm-10 col-md-6 col-lg-4">                   
                         <div class="card">
                             <h5 class="card-header">'; echo "Penpal ".$i;echo '</h5>
                             <div class="card-body"> 
-                                <h5 class="card-title">';
-                                    echo 'You: '.$_SESSION['email'].'<br/>';
-                                    echo 'Penpal: '.$_SESSION['pal_'.$i].' ';
-                         echo ' </h5>
-                                <p class="card-text">';
-                                    $sql = "SELECT pen_id FROM Penpals WHERE (user1 = '".$_SESSION['email']."' AND user2 = '".$_SESSION['pal_'.$i]."') OR (user2 = '".$_SESSION['email']."' AND user1 = '".$_SESSION['pal_'.$i]."');";
-                                    $result = $conn->query($sql);
-                                    
-                                    if (mysqli_num_rows($result) > 0)
-                                    { 
-                                        $row = $result->fetch_assoc();
-                                        $pen_id = $row['pen_id'];
-                                        echo '<br/>'.$pen_id;
-                                    }
-                                    else
-                                    {
-                                        echo "hello bye";   
-                                    } 
-
-                                    $sql = "SELECT `time` FROM 
-                                        (SELECT Max(whens) AS `time`, `content` FROM `Messages` WHERE `route` = 
-                                        (SELECT `route` FROM `Route` WHERE `sender` = '".$_SESSION['email']."' AND `pen_id` = ".$pen_id."));";
-                                    $result = $conn->query($sql);
-                            
-                                    if (mysqli_num_rows($result) > 0)
-                                    {    
-                                        $row = $result->fetch_assoc();                                                        
-                                        $date1 = $row['time']; 
-
-                                        $sql = "SELECT TIMESTAMPDIFF(SECOND,'".$date1."', Now()) AS B";                                
-                                        $result = $conn->query($sql);
-
-                                        if (mysqli_num_rows($result) > 0)
-                                        { 
-                                            $row = $result->fetch_assoc();
-                                            $diff = $row['B'];                                  
-                                        }
-                                    
-                                        $seconds = $diff; 
-                                        if($seconds >= 60)
-                                        {
-                                            $minutes = floor($seconds/60);     
-                                            if($minutes >= 60)
-                                            {
-                                                $hours = floor($minutes/60); 
-                                                if($hours >= 24)
-                                                {
-                                                    $days = floor($hours/24);
-                                                    
-                                                    if($days >= 30)
-                                                    {
-                                                        $months = floor($days/30);
-                                                        if($months >= 30)
-                                                            {
-                                                                $years = floor($months/12);                          
-                                                                $toprint=$years." years";
-                                                            }
-                                                            else $toprint = $months." months";                           
-                                                    }
-                                                    else 
-                                                        $toprint = $days." days";   
-                                                }
-                                                else $toprint = $hours." hours";   
-                                            }
-                                            else $toprint = $minutes." minutes";
-                                        }
-                                        else 
-                                            $toprint = $seconds." seconds";
-                    
-                                        echo "Last message ".$toprint." ago ";
-                                    }
-                                    else 
-                                    {
-                                        echo"NOPE";
-                                    }
-                         echo '</p>
+                                <h5 class="card-title">';echo $_SESSION['pal_'.$i].' '; echo ' </h5>
+                                <p class="card-text">{ description }</p>
                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#messageModal'.$i.'">
                                     Send Message!
                                 </button>
