@@ -1,7 +1,7 @@
 <?php
     session_start();
 
-    $servername = "localhost";
+    $servername = "localhost:3307";
     $username = "root";
     $password = "";
     $dbname = "DBMS";
@@ -37,6 +37,8 @@
 
         $sql = "SELECT * FROM Penpals where user1 = '$email' or user2 = '$email'";
         $result = $conn->query($sql);
+
+        $_SESSION['numOfPenpals'] = mysqli_num_rows($result); 
     
         if (mysqli_num_rows($result) > 0) {    
             $i = 1;

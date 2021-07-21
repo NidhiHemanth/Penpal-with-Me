@@ -87,6 +87,7 @@
                       
                     $sql = "SELECT * FROM Penpals where user1 = '".$_SESSION['email']."' or user2 = '".$_SESSION['email']."'";
                     $result = $conn->query($sql);
+                    $_SESSION['numOfPenpals'] = mysqli_num_rows($result);
                 
                     if (mysqli_num_rows($result) > 0) {    
                         $i = 1;
@@ -97,7 +98,7 @@
                             $i++;
                         }
                     }  
-                    header('Location: http://localhost/PHPfiles/PenPals/php/login.php');
+                    header('Location: http://localhost/PHPfiles/PenPals/dashboard.php');
                     exit;
                     
         

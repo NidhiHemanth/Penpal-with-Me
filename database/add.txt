@@ -1,28 +1,25 @@
-INSERT INTO Interests VALUES
-('meganraj251@gmail.com','gaming'),
-('meganraj251@gmail.com','knit'),
-('meganraj251@gmail.com','draw'),
-('maniac@psycho.com','draw'),
-('maniac@psycho.com','knit'),
-('meghanarathanraj.is19@bmsce.ac.in','draw'),
-('meghanarathanraj.is19@bmsce.ac.in','sing'),
-('fun@private.ltd','paint'),
-('fun@private.ltd','knit'),
-('fun@private.ltd','gaming'),
-('lmao@gmail.com','draw'),
-('nidhih.is19@bmsce.ac.in','gaming');
 
-INSERT INTO Languages VALUES
-('meganraj251@gmail.com','Japanese'),
-('meganraj251@gmail.com','Chinese'),
-('meganraj251@gmail.com','Korean'),
-('maniac@psycho.com','Chinese'),
-('maniac@psycho.com','Japanese'),
-('meghanarathanraj.is19@bmsce.ac.in','Japanese'),
-('fun@private.ltd','Korean'),
-('fun@private.ltd','Hindi'),
-('lmao@gmail.com','Arabic'),
-('lmao@gmail.com','Russian'),
-('lmao@gmail.com','French'),
-('nidhih.is19@bmsce.ac.in','French'),
-('nidhih.is19@bmsce.ac.in','Hindi');
+//gives route
+select route from route where pen_id = (
+    select pen_id from penpals where user1 IN ('meganraj251@gmail.com', 'lmao@gmail.com') 
+    AND user2 IN ('meganraj251@gmail.com', 'lmao@gmail.com') 
+                                        ) AND sender = 'meganraj251@gmail.com';
+
+//if route not present
+insert into route (pen_id,sender) values ("10","hehe");
+select route from route where pen_id=--- AND sender = '';
+
+//insert Messages
+insert into messages(route,content) values (---," ");
+
+//
+
+select content from (select Max(whens) AS time ,content from messages where route = (
+                                  select route from route where sender ='meganraj251@gmail.com' AND pen_id = 2
+                                                                                                  )
+                                  ) AS A;
+
+                                  select time from (select Max(whens) AS time ,content from messages where route = (
+                                  select route from route where sender ='".$_SESSION['email']."' AND pen_id = ".$pen_id."
+                                                                                                  )
+                                  ) AS A

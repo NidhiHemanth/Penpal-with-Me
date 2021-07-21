@@ -41,3 +41,33 @@ INSERT INTO Messages(route,content) VALUES
 INSERT INTO Messages(route,content) VALUES
 (1,'dont ignore pls'),
 (2,'smh');
+
+
+INSERT INTO Interests VALUES
+('meganraj251@gmail.com','gaming'),
+('meganraj251@gmail.com','knit'),
+('meganraj251@gmail.com','draw'),
+('maniac@psycho.com','draw'),
+('maniac@psycho.com','knit'),
+('meghanarathanraj.is19@bmsce.ac.in','draw'),
+('meghanarathanraj.is19@bmsce.ac.in','sing'),
+('fun@private.ltd','paint'),
+('fun@private.ltd','knit'),
+('fun@private.ltd','gaming'),
+('lmao@gmail.com','draw'),
+('nidhih.is19@bmsce.ac.in','gaming');
+
+INSERT INTO Languages VALUES
+('meganraj251@gmail.com','Japanese'),
+('meganraj251@gmail.com','Chinese'),
+('meganraj251@gmail.com','Korean'),
+('maniac@psycho.com','Chinese'),
+('maniac@psycho.com','Japanese'),
+('meghanarathanraj.is19@bmsce.ac.in','Japanese'),
+('fun@private.ltd','Korean'),
+('fun@private.ltd','Hindi'),
+('lmao@gmail.com','Arabic'),
+('lmao@gmail.com','Russian'),
+('lmao@gmail.com','French'),
+('nidhih.is19@bmsce.ac.in','French'),
+('nidhih.is19@bmsce.ac.in','Hindi');

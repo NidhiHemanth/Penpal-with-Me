@@ -1,13 +1,19 @@
 <?php
     session_start();
 
-    $servername = "localhost";
+    $servername = "localhost:3307";
     $username = "root";
     $password = "";
     $dbname = "DBMS";
 
     // confirm_delete
-    $pw = $_POST["confirm_delete"];
+    $pw = $_GET["confirm_delete"];
+
+    if($_GET['button1']==1) $_SESSION['delete_me'] = $_SESSION['pal_1'];
+    if($_GET['button2']==2) $_SESSION['delete_me'] = $_SESSION['pal_2'];
+    if($_GET['button3']==3) $_SESSION['delete_me'] = $_SESSION['pal_3'];
+
+
 
     // Create connection
     $conn = new mysqli($servername, $username, $password, $dbname);
@@ -24,19 +30,23 @@
     // echo "<h1> bye   : ".$bye."</h1>";
     // echo "<h1> pw    : ".$pw."</h1>";
     
-    $sql = "SELECT * FROM Users where email = '$email' AND password = '$pw';";
+    $sql = "SELECT * FROM Users where email = '$email' AND password = '$pw'";
+    
     $result = $conn->query($sql);
 
     if (mysqli_num_rows($result) > 0) {    
         $sql = "DELETE FROM Route WHERE pen_id IN (SELECT pen_id FROM Penpals WHERE (user1 = '$email' AND user2 = '$bye') OR (user1 = '$bye' AND user2 = '$email'));";
+        
         $conn->query($sql);
         
         $sql = "DELETE FROM Penpals WHERE pen_id IN (SELECT pen_id FROM Penpals WHERE (user1 = '$email' AND user2 = '$bye') OR (user1 = '$bye' AND user2 = '$email'));";
+        
         $conn->query($sql);
     } 
 
     $sql = "SELECT * FROM Penpals where user1 = '".$_SESSION['email']."' or user2 = '".$_SESSION['email']."'";
     $result = $conn->query($sql);
+    $_SESSION['numOfPenpals'] = mysqli_num_rows($result);
 
     if (mysqli_num_rows($result) > 0) {    
         $i = 1;
@@ -47,8 +57,9 @@
         }
     }  
     
-    header('Location: http://localhost/PHPfiles/PenPals/php/login.php');
+    header('Location: http://localhost/PHPfiles/PenPals/dashboard.php');
     exit;
+    
 
     $conn->close();
 ?>

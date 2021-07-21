@@ -1,5 +1,5 @@
 <?php 
-  $servername = "localhost";
+  $servername = "localhost:3307";
   $username = "root";
   $password = "";
   $dbname = "DBMS";
@@ -190,7 +190,8 @@
         <?php 
            
             $i = 1; error_reporting(0); 
-            while($i <= $_SESSION['pal_'.$i]) {
+            
+            while($i<=$_SESSION['numOfPenpals']) {
                 echo '     
                     <div class="col-sm-10 col-md-6 col-lg-4">                   
                         <div class="card">
@@ -334,15 +335,17 @@
                                         </div>
                                         <div class="modal-body">
                                         <h5>Are you sure you want to remove ';
-                                            echo $_SESSION['pal_name_'.$i].' '; 
-                                            $_SESSION['delete_me'] = $_SESSION['pal_'.$i];
+                                            echo $_SESSION['pal_name_'.$i].' ';                                          
                                             echo '
                                         </h5>
-                                        <form method="POST" action="./php/delete_pal.php">
+                                        <form method="GET" action="./php/delete_pal.php">
                                             <div class="input-group">
                                                 <input type="password" name="confirm_delete" placeholder="Password" class="form-control">
-                                                <button type="submit" class="btn btn-outline-secondary">Confirm identity</button>';
-                                      echo '</div>
+                                                <button type="submit" class="btn btn-outline-secondary" name = "button';
+                                            echo $i;
+                                                echo '" value = "';
+                                                echo $i;
+                                                echo '">Confirm identity</button> </div>
                                         </form>
                                     </div>
                                     <div class="modal-footer">
