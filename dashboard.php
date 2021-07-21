@@ -61,7 +61,7 @@
                           </h2>
                           <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
                             <div class="accordion-body">
-                                <form action="">
+                                <form action="./php/update_interest.php" method="post">
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
                                         <label class="form-check-label" for="flexCheckDefault">
@@ -98,7 +98,7 @@
                                           Tech field
                                         </label>
                                     </div>
-                                    <button type="button" class="btn btn-primary set-profile">Save changes</button>
+                                    <button type="submit" name="submit_interest" class="btn btn-primary set-profile">Save changes</button>
                                 </form>
                             </div>
                           </div>
@@ -111,38 +111,38 @@
                           </h2>
                           <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingThree">
                             <div class="accordion-body">
-                                <form action="">
+                                <form action="./php/update_lang.php" method="post">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                        <input class="form-check-input" type="checkbox" value="English" name="lang[]" id="flexCheckDefault">
                                         <label class="form-check-label" for="flexCheckDefault">
                                           English
                                         </label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                        <input class="form-check-input" type="checkbox" value="Hindi" name="lang[]" id="flexCheckDefault">
                                         <label class="form-check-label" for="flexCheckDefault">
                                           Hindi
                                         </label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                        <input class="form-check-input" type="checkbox" value="Spanish" name="lang[]" id="flexCheckDefault">
                                         <label class="form-check-label" for="flexCheckDefault">
                                           Spanish
                                         </label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                        <input class="form-check-input" type="checkbox" value="Chinese" name="lang[]" id="flexCheckDefault">
                                         <label class="form-check-label" for="flexCheckDefault">
                                           Chinese
                                         </label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                        <input class="form-check-input" type="checkbox" value="Japanese" name="lang[]" id="flexCheckDefault">
                                         <label class="form-check-label" for="flexCheckDefault">
                                           Japanese
                                         </label>
                                     </div>
-                                    <button type="button" class="btn btn-primary set-profile">Save changes</button>
+                                    <button type="submit" name="submit_lang" class="btn btn-primary set-profile">Save changes</button>
                                 </form>
                             </div>
                           </div>
@@ -173,7 +173,7 @@
      
        
 
-        <form action = "./php/Addpenpal.php" method="get">
+        <form action = "./php/Addpenpal.php" method="POST">
         <button type="submit" class="btn btn-secondary btn-lg" name="AddPenpal"
                     class="button" value="Get a Penpal!">Get a Penpal!</button>                        
           
@@ -341,11 +341,10 @@
                                         <form method="GET" action="./php/delete_pal.php">
                                             <div class="input-group">
                                                 <input type="password" name="confirm_delete" placeholder="Password" class="form-control">
-                                                <button type="submit" class="btn btn-outline-secondary" name = "button';
-                                            echo $i;
-                                                echo '" value = "';
-                                                echo $i;
-                                                echo '">Confirm identity</button> </div>
+                                                <button type="submit" class="btn btn-outline-secondary" name = "button'.$i.'" value = "'.$i.'">
+                                                  Confirm identity
+                                                </button> 
+                                            </div>
                                         </form>
                                     </div>
                                     <div class="modal-footer">
