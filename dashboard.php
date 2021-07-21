@@ -1,12 +1,23 @@
 <?php 
+  $servername = "localhost:3307";
+  $username = "root";
+  $password = "";
+  $dbname = "DBMS";
+   // Create connection
+   $conn = new mysqli($servername, $username, $password, $dbname);
+   // Check connection
+   if ($conn->connect_error) {
+       die("Connection failed: " . $conn->connect_error);
+   }
+             
     session_start();
 
     if(!isset($_SESSION['logged_in'])) {
         header('Location: http://localhost/PHPfiles/PenPals/index.php');
         exit;
     }
+   
 ?>
-
 <!DOCTYPE html>
 <head>
     <title>PenPals</title>
@@ -16,9 +27,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 </head>
-
 <body>
-    <div class="container-fluid header">
+<div class="container-fluid header">
         <button type="button" class="btn btn-warning setting" data-bs-toggle="modal" data-bs-target="#settingModal"><i class="fa fa-gear fa-spin" style="font-size:24px"></i></button>
         <div class="modal fade" id="settingModal" tabindex="-1" aria-labelledby="settingModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
@@ -138,204 +148,208 @@
                           </div>
                         </div>
                       </div>
-                    </div>
-                    <div class="modal-footer justify-content-between">
-                        <button type="button" class="btn btn-primary">Save changes</button>
-                        <a class="btn btn-secondary" href="./php/logout.php">Log Out</a>
-                        <!-- <button type="button" class="btn btn-secondary" href="./php/logout.php">Log Out</button> -->
-                    </div>
                 </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <a type="button" class="btn btn-secondary" href="./php/logout.php">Log Out</a>
+                 
+                </div>
+              </div>
             </div>
         </div>
     </div>
-    <div class="container first-card">
-        <div class="row d-flex justify-content-center">
-            <div class="col-md-8">
-                <h1>Welcome,  <?php echo $_SESSION['username'].' ';?>!</h1>
-                <div class="intro">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio exercitationem odit alias necessitatibus placeat repellendus tempora laborum facere inventore quaerat dicta officiis consequatur, sunt nostrum, amet nam corporis veniam! Voluptate.
-                    <?php 
-                        // echo $_SESSION['pal_1'];
-                        // echo $_SESSION['pal_name_1'];
-                        // echo $_SESSION['pal_2'];
-                        // echo $_SESSION['pal_name_2'];
-                    ?>
-                </div>
-                <button type="button" class="btn btn-secondary btn-lg">Get a PenPal</button>
-            </div>
-        </div>
-    </div>
-    <div class="container">
-        <div class="row">
-            <?php 
-                error_reporting(0);
-            
-                $servername = "localhost";
-                $username = "root";
-                $password = "";
-                $dbname = "DBMS";
-        
-                // Create connection
-                $conn = new mysqli($servername, $username, $password, $dbname);
-                // Check connection
-                if ($conn->connect_error) {
-                    die("Connection failed: " . $conn->connect_error);
-                }                
-        
-                $i = 1; 
-                while($i <= $_SESSION['pal_'.$i]) {
-                    echo '     
-                        <div class="col-sm-10 col-md-6 col-lg-4">                   
-                            <div class="card">
-                                <h5 class="card-header">'; echo "Penpal ".$i; echo '</h5>
-                                <div class="card-body"> 
-                                    <h5 class="card-title">';
-                                        echo $_SESSION['pal_'.$i].' '; 
-                                        // echo $_SESSION['pal_name_'.$i].' '; 
-                                        // echo $_SESSION['penpal_id_'.$i]; 
-                                        echo ' 
-                                    </h5>
-                                    <p class="card-text">';
-                                    
-                                        $sql = "SELECT time FROM 
-                                            (SELECT MAX(whens) AS time, content FROM Messages WHERE route = 
-                                            (SELECT route FROM Route WHERE sender = '".$_SESSION['email']."' AND pen_id = ".$_SESSION['penpal_id_'.$i].")) AS A";
-                                        $result = $conn->query($sql);
-                                        
-                                        if (mysqli_num_rows($result) > 0)
-                                        {    
-                                            $row = $result->fetch_assoc();                                                        
-                                            $date1 = $row['time']; 
 
-                                            $sql = "SELECT TIMESTAMPDIFF(SECOND,'".$date1."', Now()) AS B";                                
-                                            $result = $conn->query($sql);
-                                            if (mysqli_num_rows($result) > 0)
-                                            { 
-                                                $row = $result->fetch_assoc();
-                                                $diff = $row['B'];                                  
-                                            }
-                                        
-                                            $seconds = $diff; 
-                                            if($seconds >= 60)
-                                            {
-                                                $minutes = floor($seconds/60);     
-                                                if($minutes >= 60)
-                                                {
-                                                    $hours = floor($minutes/60); 
-                                                    if($hours >= 24)
+    <div class="container first-card">
+                  <div class="row d-flex justify-content-center">
+                      <div class="col-md-8">
+                          <h1>Welcome,<?php echo $_SESSION['username'].' ';?>!</h1>
+                          <div class="intro">
+                              Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio exercitationem odit alias necessitatibus placeat repellendus tempora laborum facere inventore quaerat dicta officiis consequatur, sunt nostrum, amet nam corporis veniam! Voluptate.
+                          </div>
+                          
+                          
+            
+
+     
+       
+
+        <form action = "./php/Addpenpal.php" method="get">
+        <button type="submit" class="btn btn-secondary btn-lg" name="AddPenpal"
+                    class="button" value="Get a Penpal!">Get a Penpal!</button>                        
+          
+        </form>
+      
+               
+                      
+            </div>
+                  </div>
+                    </div>
+   
+    <div class="container">
+    <div class="row">
+        <?php 
+           
+            $i = 1; error_reporting(0); 
+            while($i <= $_SESSION['pal_'.$i]) {
+                echo '     
+                    <div class="col-sm-10 col-md-6 col-lg-4">                   
+                        <div class="card">
+                            <h5 class="card-header">'; echo "Penpal ".$i;echo '</h5>
+                            <div class="card-body"> 
+                                <h5 class="card-title">';
+                                $sql = "select name from users where email = '".$_SESSION['pal_'.$i]."'";
+                                $result=$conn->query($sql);
+                                $row = $result->fetch_assoc();                                
+                                echo $row['name'].' ';
+                                echo ' </h5>
+                                <p class="card-text">
+                                ';
+                                
+                                $sql = "select pen_id from Penpals where (user1 = '".$_SESSION['email']."' AND user2 = '".$_SESSION['pal_'.$i]."') OR (user2 = '".$_SESSION['username']."' AND user1 = '".$_SESSION['pal_'.$i]."');";
+                                $result = $conn->query($sql);
+                          if (mysqli_num_rows($result) > 0)
+                          { 
+                                $row = $result->fetch_assoc();
+                                $pen_id = $row['pen_id'];
+
+                                $sql = "select time from (select Max(whens) AS time ,content from messages where route = (
+                                  select route from route where sender ='".$_SESSION['email']."' AND pen_id = ".$pen_id."
+                                                                                                  )
+                                  ) AS A";
+                                $result = $conn->query($sql);
+                        
+                              if (mysqli_num_rows($result) > 0)
+                              {    
+                                $row = $result->fetch_assoc();                                                        
+                                $date1 = $row['time']; 
+
+                                
+                                $sql = "SELECT TIMESTAMPDIFF(SECOND,'".$date1."', Now()) AS B";                                
+                                $result = $conn->query($sql);
+                                if (mysqli_num_rows($result) > 0)
+                                { 
+                                  $row = $result->fetch_assoc();
+                                  $diff = $row['B'];                                  
+                                                                  
+                                }
+                                
+                                $seconds = $diff; 
+                                if($seconds >= 60)
+                                {
+                                        $minutes = floor($seconds/60);     
+                                        if($minutes >= 60)
+                                        {
+                                                $hours = floor($minutes/60); 
+                                                if($hours >= 24)
                                                     {
                                                         $days = floor($hours/24);
-
-                                                        if($days >= 30)
-                                                        {
-                                                            $months = floor($days/30);
-                                                            if($months >= 30)
-                                                                {
-                                                                    $years = floor($months/12);                          
-                                                                    $toprint=$years." years";
-                                                                }
-                                                                else $toprint = $months." months";                           
-                                                        }
-                                                        else 
-                                                            $toprint = $days." days";   
+                                                        
+                                                            if($days >= 30)
+                                                            {
+                                                                $months = floor($days/30);
+                                                                if($months >= 30)
+                                                                    {
+                                                                        $years = floor($months/12);                          
+                                                                        $toprint=$years." years";
+                        
+                                                                    }
+                                                                    else $toprint = $months." months";                           
+                                                                
+                        
+                                                            }
+                                                            else $toprint = $days." days";   
                                                     }
-                                                    else 
-                                                        $toprint = $hours." hours";   
-                                                }
-                                                else 
-                                                    $toprint = $minutes." minutes";
+                                                    else $toprint = $hours." hours";   
                                         }
-                                        else 
-                                            $toprint = $seconds." seconds";
-                                
-                                        echo "Last message ".$toprint." ago ";
-                                    }
-                                    else 
-                                        echo"NOPE";
-                          echo '</p>
-                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#messageModal'.$i.'">
-                                        Send Message!
-                                    </button>
-                                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop'.$i.'">Delete Penpal</button>
-                                    <div class="modal fade" id="messageModal'.$i.'" tabindex="-1" aria-labelledby="messageModalLabel'.$i.'" aria-hidden="true">
-                                        <div class="modal-dialog modal-fullscreen">
-                                            <div class="modal-content modal-content-message">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="messageModalLabel'.$i.'"> ';
-                                                        echo 'PenPal : '.$_SESSION['pal_'.$i].' ';
-                                                        // echo 'PenPal : '.$_SESSION['pal_name_'.$i].' ';
-                                                        echo '
-                                                    </h5>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                </div>
-                                                <div class="container">
-                                                    <div class="row d-flex justify-content-center">
-                                                        <div class="col-md-5">
-                                                            <div class="modal-body">
-                                                                <!-- PenPal description -->
-                                                                <h3>Send a message to  ';
-                                                                    echo $_SESSION['pal_'.$i].' ';
-                                                                    // echo $_SESSION['pal_name_'.$i].' ';
-                                                                    echo '
-                                                                </h3>
-                                                                <div class="mb-3">
-                                                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                                                                </div>
-                                                            </div>    
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="container">
-                                                    <div class="row d-flex justify-content-center">
-                                                        <div class="col-md-5">
-                                                            <div class="msg-body">
-                                                                <h5>Last message</h5>
-                                                                <div></div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="modal-footer modal-footer-message">
-                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Back to Dashboard</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="modal fade" id="staticBackdrop'.$i.'" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel'.$i.'" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                            <h5 class="modal-title" id="staticBackdropLabel'.$i.'">Confirm deletion of  ';
-                                                echo $_SESSION['pal_'.$i].' ';
-                                                echo $_SESSION['pal_name_'.$i].' '; 
-                                                echo '
-                                            </h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <h5>Are you sure you want to remove ';
-                                                    echo $_SESSION['pal_'.$i].' '; 
-                                                    // echo $_SESSION['pal_name_'.$i].' '; 
+                                        else $toprint = $minutes." minutes";
+                                }
+                                else if($seconds != '') $toprint = $seconds." seconds";
+                        
+                                if($toprint != '')echo "Last message ".$toprint." ago ";
+                                else echo "No messages sent!";
+                              }else echo "No messages sent!";
+                                    
+                        }else echo "No messages sent!";                 
+                                   
 
-                                                    $_SESSION['delete_me'] = $_SESSION['pal_'.$i];
+                               
+
+                echo '</p>
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#messageModal'.$i.'">
+                                    Send Message!
+                                </button>
+                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop'.$i.'">Delete Penpal</button>
+                                <div class="modal fade" id="messageModal'.$i.'" tabindex="-1" aria-labelledby="messageModalLabel'.$i.'" aria-hidden="true">
+                                    <div class="modal-dialog modal-fullscreen">
+                                        <div class="modal-content modal-content-message">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="messageModalLabel'.$i.'"> ';
+                                                    echo $_SESSION['pal_'.$i].' ';
                                                     echo '
                                                 </h5>
-                                                <form method="POST" action="./php/delete_pal.php">
-                                                    <div class="input-group">
-                                                        <input type="password" name="confirm_delete" placeholder="Password" class="form-control">
-                                                        <button type="submit" class="btn btn-outline-secondary">Confirm identity</button>';
-                                              echo '</div>
-                                                </form>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">I changed my mind</button>
+                                            <div class="container">
+                                                <div class="row d-flex justify-content-center">
+                                                    <div class="col-md-5">
+                                                        <div class="modal-body">
+                                                            <!-- PenPal description -->
+                                                            <h3>Send a message to  ';
+                                                                echo $_SESSION['pal_'.$i].' ';
+                                                                echo '
+                                                            </h3>
+                                                            <div class="mb-3">
+                                                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                                            </div>
+                                                        </div>    
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>
+                                            <div class="container">
+                                                <div class="row d-flex justify-content-center">
+                                                    <div class="col-md-5">
+                                                        <div class="msg-body">
+                                                            <h5>Last message</h5>
+                                                            <div></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer modal-footer-message">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Back to Dashboard</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
+                                <div class="modal fade" id="staticBackdrop'.$i.'" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel'.$i.'" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                      <div class="modal-content">
+                                        <div class="modal-header">
+                                          <h5 class="modal-title" id="staticBackdropLabel'.$i.'">Confirm deletion of  ';
+                                            echo $_SESSION['pal_'.$i].' ';
+                                            
+                                            echo '
+                                          </h5>
+                                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <h5>Are you sure you want to remove ';
+                                                echo $_SESSION['pal_'.$i].' ';
+                                                echo '
+                                            </h5>
+                                            <label for="confirmDeletePassword" class="form-label">Enter Password for confirmation</label>
+                                            <input type="password" id="confirmDeletePassword" class="form-control" aria-describedby="passwordHelpBlock">
+                                        </div>
+                                        <div class="modal-footer">
+                                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">I changed my mind</button>
+                                          <button type="button" class="btn btn-primary">Yes, I`m sure</button>
+                                        </div>
+                                      </div>
+                                    </div>
+                                </div>
                             </div>
-                        </div>';
+                        </div>
+                    </div>';
 
                         $i++;
                     }
@@ -344,6 +358,8 @@
         </div> 
     </div>
 
+
+   
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
