@@ -310,7 +310,24 @@
                                                 <div class="row d-flex justify-content-center">
                                                     <div class="col-md-5">
                                                         <div class="msg-body">
-                                                            <h5>Last message</h5>
+                                                            <h5>';
+                                                            $sql = "select content from (select Max(whens) AS time ,content from Messages where route = (
+                                                              select route from Route where sender ='".$_SESSION['email']."' AND pen_id = ".$pen_id."
+                                                                                                                              )
+                                                              ) AS A";
+                                                              
+                                                            $result = $conn->query($sql);
+                                                          
+                                                          if (mysqli_num_rows($result) > 0)
+                                                          {    
+                                                            $row = $result->fetch_assoc();                                                        
+                                                            $Lmessage = $row['content'];
+                                                            if(!is_NULL($Lmessage)) echo $Lmessage;
+                                                            else echo "You are sending your first message!"; 
+                                                          }
+                                                          else echo "You are sending your first message!"; 
+                                                            
+                                                            echo '</h5>
                                                             <div></div>
                                                         </div>
                                                     </div>
