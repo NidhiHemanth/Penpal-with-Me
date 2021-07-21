@@ -63,37 +63,37 @@
                             <div class="accordion-body">
                                 <form action="./php/update_interest.php" method="post">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                        <input class="form-check-input" type="checkbox" value="Art" name="interest[]" id="flexCheckDefault">
                                         <label class="form-check-label" for="flexCheckDefault">
                                           Art (Painting / Sketching etc)
                                         </label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                        <input class="form-check-input" type="checkbox" value="Anime" name="interest[]" id="flexCheckDefault">
                                         <label class="form-check-label" for="flexCheckDefault">
                                           Anime
                                         </label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                        <input class="form-check-input" type="checkbox" value="Gaming" name="interest[]" id="flexCheckDefault">
                                         <label class="form-check-label" for="flexCheckDefault">
                                           Gaming
                                         </label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                        <input class="form-check-input" type="checkbox" value="Music" name="interest[]" id="flexCheckDefault">
                                         <label class="form-check-label" for="flexCheckDefault">
                                           Music
                                         </label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                        <input class="form-check-input" type="checkbox" value="Binge_Watch" name="interest[]" id="flexCheckDefault">
                                         <label class="form-check-label" for="flexCheckDefault">
                                           Movies / TV Shows
                                         </label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                        <input class="form-check-input" type="checkbox" value="Tech" name="interest[]" id="flexCheckDefault">
                                         <label class="form-check-label" for="flexCheckDefault">
                                           Tech field
                                         </label>
