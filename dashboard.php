@@ -139,7 +139,7 @@
                 </div>
                 <div class="modal-footer justify-content-between">
                     <button type="button" class="btn btn-primary">Save changes</button>
-                    <button type="button" class="btn btn-secondary" href="./php/logout.php">Log Out</button>
+                    <a type="button" class="btn btn-secondary" href="./php/logout.php">Log Out</a>
                     <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
                 </div>
               </div>
