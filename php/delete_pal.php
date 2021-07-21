@@ -8,6 +8,7 @@
 
     // confirm_delete
     $pw = $_POST["confirm_delete"];
+    $identiy = $_POST["identity"];
 
     // Create connection
     $conn = new mysqli($servername, $username, $password, $dbname);
@@ -19,6 +20,9 @@
     $email = $_SESSION['email'];
     $name = $_SESSION['username'];
     $bye = $_SESSION['delete_me'];
+
+    echo "<h1>no".$_POST['name'.$i]."no</h1>";
+
     // echo "<h1> email : ".$email."</h1>";
     // echo "<h1> name  : ".$name."</h1>";
     // echo "<h1> bye   : ".$bye."</h1>";
@@ -47,7 +51,7 @@
         }
     }  
     
-    header('Location: http://localhost/PHPfiles/PenPals/php/login.php');
+    // header('Location: http://localhost/PHPfiles/PenPals/php/login.php');
     exit;
 
     $conn->close();
