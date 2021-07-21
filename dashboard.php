@@ -316,14 +316,19 @@
                                                 <h5>Are you sure you want to remove ';
                                                     echo $_SESSION['pal_'.$i].' '; 
                                                     // echo $_SESSION['pal_name_'.$i].' '; 
+
+                                                    $_SESSION['delete_me'] = $_SESSION['pal_'.$i];
                                                     echo '
                                                 </h5>
-                                                <label for="confirmDeletePassword" class="form-label">Enter Password for confirmation</label>
-                                                <input type="password" id="confirmDeletePassword" class="form-control" aria-describedby="passwordHelpBlock">
+                                                <form method="POST" action="./php/delete_pal.php">
+                                                    <div class="input-group">
+                                                        <input type="password" name="confirm_delete" placeholder="Password" class="form-control">
+                                                        <button type="submit" class="btn btn-outline-secondary">Confirm identity</button>';
+                                              echo '</div>
+                                                </form>
                                             </div>
                                             <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">I changed my mind</button>
-                                            <button type="button" class="btn btn-primary">Yes, I`m sure</button>
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">I changed my mind</button>
                                             </div>
                                         </div>
                                         </div>
