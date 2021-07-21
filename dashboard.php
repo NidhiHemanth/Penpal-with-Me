@@ -154,7 +154,6 @@
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio exercitationem odit alias necessitatibus placeat repellendus tempora laborum facere inventore quaerat dicta officiis consequatur, sunt nostrum, amet nam corporis veniam! Voluptate.
                 </div>
                 <button type="button" class="btn btn-secondary btn-lg">Get a PenPal</button>
-                <div class="new-penpal">username?</div>
             </div>
         </div>
     </div>
@@ -169,7 +168,80 @@
                             <h5 class="card-header">'; echo "Penpal ".$i;echo '</h5>
                             <div class="card-body"> 
                                 <h5 class="card-title">';echo $_SESSION['pal_'.$i].' '; echo ' </h5>
+<<<<<<< Updated upstream
                                 <p class="card-text">{ description }</p>
+=======
+                                <p class="card-text">
+                                ';
+                                $sql = "select pen_id from Penpals where (user1 = '".$_SESSION['email']."' AND user2 = '".$_SESSION['pal_'.$i]."') OR (user2 = '".$_SESSION['username']."' AND user1 = '".$_SESSION['pal_'.$i]."');";
+                                
+                                $result = $conn->query($sql);
+                                if (mysqli_num_rows($result) > 0)
+                                { 
+                                $row = $result->fetch_assoc();
+                                $pen_id = $row['pen_id'];
+                                    
+                                }
+                                else echo "hello bye";   
+
+                                $sql = "select time from (select Max(whens) AS time ,content from messages where route = (
+                                  select route from route where sender ='".$_SESSION['email']."' AND pen_id = ".$pen_id."
+                                                                                                  )
+                                  ) AS A";
+                                $result = $conn->query($sql);
+                        
+                                if (mysqli_num_rows($result) > 0)
+                                {    
+                                $row = $result->fetch_assoc();                                                        
+                                $date1 = $row['time']; 
+
+                                
+                                $sql = "SELECT TIMESTAMPDIFF(SECOND,'".$date1."', Now()) AS B";                                
+                                $result = $conn->query($sql);
+                                if (mysqli_num_rows($result) > 0)
+                                { 
+                                  $row = $result->fetch_assoc();
+                                  $diff = $row['B'];                                  
+                                                                  
+                                }
+                                
+                                $seconds = $diff; 
+                                if($seconds >= 60)
+                                {
+                                        $minutes = floor($seconds/60);     
+                                        if($minutes >= 60)
+                                        {
+                                                $hours = floor($minutes/60); 
+                                                if($hours >= 24)
+                                                    {
+                                                        $days = floor($hours/24);
+                                                        
+                                                            if($days >= 30)
+                                                            {
+                                                                $months = floor($days/30);
+                                                                if($months >= 30)
+                                                                    {
+                                                                        $years = floor($months/12);                          
+                                                                        $toprint=$years." years";
+                        
+                                                                    }
+                                                                    else $toprint = $months." months";                           
+                                                                
+                        
+                                                            }
+                                                            else $toprint = $days." days";   
+                                                    }
+                                                    else $toprint = $hours." hours";   
+                                        }
+                                        else $toprint = $minutes." minutes";
+                                }
+                                else $toprint = $seconds." seconds";
+                        
+                                echo "Last message ".$toprint." ago ";
+                                }else echo"NOPE";
+
+                echo '</p>
+>>>>>>> Stashed changes
                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#messageModal'.$i.'">
                                     Send Message!
                                 </button>
