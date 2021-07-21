@@ -28,9 +28,10 @@
                 <div class="modal-body">
                     ...
                 </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                  <button type="button" class="btn btn-primary">Save changes</button>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <a href="./php/logout.php" class="btn btn-secondary" id="logout">Logout</a>
+                    <!-- <button type="button" class="btn btn-secondary" action="./php/logout.php">Log Out</button> -->
                 </div>
               </div>
             </div>
