@@ -58,3 +58,9 @@ div.new-penpal {
     right: 10px;
     top: 10px;
 }
+
+.set-profile {
+    position: relative;
+    top: -40px;
+    float: right;
+}
