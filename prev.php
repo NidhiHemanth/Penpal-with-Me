@@ -139,8 +139,8 @@
                 </div>
                 <div class="modal-footer justify-content-between">
                     <button type="button" class="btn btn-primary">Save changes</button>
-                    <a type="button" class="btn btn-secondary" href="./php/logout.php">Log Out</a>
-                    <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
+                    <a class="btn btn-secondary" href="./php/logout.php">Log Out</a>
+                    <!-- <button type="button" class="btn btn-secondary" href="./php/logout.php">Log Out</button> -->
                 </div>
               </div>
             </div>
@@ -154,14 +154,28 @@
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio exercitationem odit alias necessitatibus placeat repellendus tempora laborum facere inventore quaerat dicta officiis consequatur, sunt nostrum, amet nam corporis veniam! Voluptate.
                 </div>
                 <button type="button" class="btn btn-secondary btn-lg">Get a PenPal</button>
-                <div class="new-penpal">username?</div>
+            
             </div>
         </div>
     </div>
     <div class="container">
     <div class="row">
         <?php 
-            $i = 1; error_reporting(0);
+          error_reporting(0);
+          
+          $servername = "localhost";
+          $username = "root";
+          $password = "";
+          $dbname = "DBMS";
+      
+          // Create connection
+          $conn = new mysqli($servername, $username, $password, $dbname);
+          // Check connection
+          if ($conn->connect_error) {
+              die("Connection failed: " . $conn->connect_error);
+          }                
+       
+            $i = 1; 
             while($i<= $_SESSION['pal_'.$i]) {
                 echo '     
                     <div class="col-sm-10 col-md-6 col-lg-4">                   
@@ -169,7 +183,75 @@
                             <h5 class="card-header">'; echo "Penpal ".$i;echo '</h5>
                             <div class="card-body"> 
                                 <h5 class="card-title">';echo $_SESSION['pal_'.$i].' '; echo ' </h5>
-                                <p class="card-text">{ description }</p>
+                                <p class="card-text">
+                                ';
+                                
+                                $sql = "select pen_id from Penpals where (user1 = '".$_SESSION['email']."' AND user2 = '".$_SESSION['pal_'.$i]."') OR (user2 = '".$_SESSION['email']."' AND user1 = '".$_SESSION['pal_'.$i]."');";
+                                
+                                $result = $conn->query($sql);
+                                if (mysqli_num_rows($result) > 0)
+                                { 
+                                    $row = $result->fetch_assoc();
+                                    $pen_id = $row['pen_id'];
+                                }
+                                else echo "hello bye";   
+
+                                $sql = "SELECT time FROM 
+                                    (SELECT MAX(whens) AS time, content FROM Messages WHERE route = 
+                                    (SELECT route FROM Route WHERE sender = '".$_SESSION['email']."' AND pen_id = ".$pen_id.")) AS A";
+                                $result = $conn->query($sql);
+                                if (mysqli_num_rows($result) > 0)
+                                
+                                {    
+                                $row = $result->fetch_assoc();                                                        
+                                $date1 = $row['time']; 
+
+                                
+                                $sql = "SELECT TIMESTAMPDIFF(SECOND,'".$date1."', Now()) AS B";                                
+                                $result = $conn->query($sql);
+                                if (mysqli_num_rows($result) > 0)
+                                { 
+                                  $row = $result->fetch_assoc();
+                                  $diff = $row['B'];                                  
+                                                                  
+                                }
+                                
+                                $seconds = $diff; 
+                                if($seconds >= 60)
+                                {
+                                        $minutes = floor($seconds/60);     
+                                        if($minutes >= 60)
+                                        {
+                                                $hours = floor($minutes/60); 
+                                                if($hours >= 24)
+                                                    {
+                                                        $days = floor($hours/24);
+                                                        
+                                                            if($days >= 30)
+                                                            {
+                                                                $months = floor($days/30);
+                                                                if($months >= 30)
+                                                                    {
+                                                                        $years = floor($months/12);                          
+                                                                        $toprint=$years." years";
+                        
+                                                                    }
+                                                                    else $toprint = $months." months";                           
+                                                                
+                        
+                                                            }
+                                                            else $toprint = $days." days";   
+                                                    }
+                                                    else $toprint = $hours." hours";   
+                                        }
+                                        else $toprint = $minutes." minutes";
+                                }
+                                else $toprint = $seconds." seconds";
+                        
+                                echo "Last message ".$toprint." ago ";
+                                }else echo"NOPE";
+
+                echo '</p>
                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#messageModal'.$i.'">
                                     Send Message!
                                 </button>
@@ -252,6 +334,8 @@
             </div>
         </div> 
     </div>
+
+
    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -259,5 +343,3 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
 </body>
 </html>
-
-
