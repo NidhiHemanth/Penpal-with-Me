@@ -1,7 +1,7 @@
 <?php
     session_start();
 
-    $servername = "localhost:3307";
+    $servername = "localhost";
     $username = "root";
     $password = "";
     $dbname = "DBMS";
@@ -13,8 +13,6 @@
     if($_GET['button2']==2) $_SESSION['delete_me'] = $_SESSION['pal_2'];
     if($_GET['button3']==3) $_SESSION['delete_me'] = $_SESSION['pal_3'];
 
-
-
     // Create connection
     $conn = new mysqli($servername, $username, $password, $dbname);
     // Check connection
@@ -25,6 +23,9 @@
     $email = $_SESSION['email'];
     $name = $_SESSION['username'];
     $bye = $_SESSION['delete_me'];
+
+    echo "<h1>no".$_POST['name'.$i]."no</h1>";
+
     // echo "<h1> email : ".$email."</h1>";
     // echo "<h1> name  : ".$name."</h1>";
     // echo "<h1> bye   : ".$bye."</h1>";
@@ -58,6 +59,7 @@
     }  
     
     header('Location: http://localhost/PHPfiles/PenPals/dashboard.php');
+    // header('Location: http://localhost/PHPfiles/PenPals/php/login.php');
     exit;
     
 

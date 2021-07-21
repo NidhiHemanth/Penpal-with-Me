@@ -1,11 +1,7 @@
 <?php          
-      session_start();
+    session_start();
 
-      if(!isset($_SESSION['logged_in'])) {
-          header('Location: http://localhost/PHPfiles/PenPals/index.php');
-          exit;
-      }
-    $servername = "localhost:3307";
+    $servername = "localhost";
     $username = "root";
     $password = "";
     $dbname = "DBMS";
@@ -15,10 +11,9 @@
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
-                        $sql ="select * from penpals where user1 ='".$_SESSION['email']."' OR user2 ='".$_SESSION['email']."'";
+                        $sql ="select * from Penpals where user1 ='".$_SESSION['email']."' OR user2 ='".$_SESSION['email']."'";
                     
                         $result = $conn->query($sql);
-                    
                     
                         if (mysqli_num_rows($result) < 3)
                         {              
@@ -49,8 +44,8 @@
                     $conn->query($sql);                               
                     
                     
-                    $sql = "create view filtered AS select * from potentials where !(email in (select user1 from penpals where user2 = '".$_SESSION['email']."') 
-                    Or email in (select user2 from penpals where user1 ='".$_SESSION['email']."'))";
+                    $sql = "create view filtered AS select * from potentials where !(email in (select user1 from Penpals where user2 = '".$_SESSION['email']."') 
+                    Or email in (select user2 from Penpals where user1 ='".$_SESSION['email']."'))";
                     $conn->query($sql);
 
                     $sql ="SELECT email FROM filtered
@@ -60,9 +55,6 @@
 
                     $result = $conn->query($sql);
                     
-                    
-                    
-
                     if (mysqli_num_rows($result) > 0)
                     { 
                         $row = $result->fetch_assoc();
@@ -101,7 +93,4 @@
                     header('Location: http://localhost/PHPfiles/PenPals/dashboard.php');
                     exit;
                     
-        
-            
-       
-      ?>
+?>

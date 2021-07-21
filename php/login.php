@@ -1,7 +1,7 @@
 <?php
     session_start();
 
-    $servername = "localhost:3307";
+    $servername = "localhost";
     $username = "root";
     $password = "";
     $dbname = "DBMS";
@@ -46,25 +46,9 @@
                 $_SESSION['penpal_id_'.$i] = $row["pen_id"];
 
                 if($row["user2"] <> $email)
-                {
                     $_SESSION['pal_'.$i] = $row["user2"];
-                    $temp = $row["user2"];
-                } 
                 else
-                {
                     $_SESSION['pal_'.$i] = $row["user1"];
-                    $temp = $row["user1"];
-                } 
-
-                // $sql = "SELECT name FROM Users where email = '$temp'";
-                // $result = $conn->query($sql);       
-                
-                // if (mysqli_num_rows($result) > 0) {    
-                //     while($row = $result->fetch_assoc()) {
-                //         $_SESSION['pal_name_'.$i] = $row["name"];
-                //     } 
-                // } 
-
                 $i++;
             }
         } 
