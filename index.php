@@ -1,3 +1,11 @@
+<?php 
+    session_start();
+
+    if(isset($_SESSION['logged_in'])) {
+        header('Location: http://localhost/PHPfiles/PenPals/dashboard.php');
+        exit;
+    }
+?>
 <!DOCTYPE html>
 <head>
     <title>Login / Sign Up</title>
@@ -46,7 +54,7 @@
                 <span>or use your account</span>
 
                 <div id="error_message_login"></div>
-                <input type="text" placeholder="Username" name="email2" id="email2" required/>
+                <input type="text" placeholder="Email" name="email2" id="email2" required/>
                 <input type="password" placeholder="Password" name="pw2" id="pw2" required/>
                 <div class="inline-fields">
                     <input type="checkbox" name="remember" id="rem">
