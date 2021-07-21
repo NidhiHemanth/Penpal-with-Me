@@ -1,5 +1,5 @@
 <?php 
-  $servername = "localhost:3307";
+  $servername = "localhost";
   $username = "root";
   $password = "";
   $dbname = "DBMS";
@@ -197,7 +197,7 @@
                             <h5 class="card-header">'; echo "Penpal ".$i;echo '</h5>
                             <div class="card-body"> 
                                 <h5 class="card-title">';
-                                $sql = "select name from users where email = '".$_SESSION['pal_'.$i]."'";
+                                $sql = "select name from Users where email = '".$_SESSION['pal_'.$i]."'";
                                 $result=$conn->query($sql);
                                 $row = $result->fetch_assoc();                                
                                 echo $row['name'].' ';
@@ -212,8 +212,8 @@
                                 $row = $result->fetch_assoc();
                                 $pen_id = $row['pen_id'];
 
-                                $sql = "select time from (select Max(whens) AS time ,content from messages where route = (
-                                  select route from route where sender ='".$_SESSION['email']."' AND pen_id = ".$pen_id."
+                                $sql = "select time from (select Max(whens) AS time ,content from Messages where route = (
+                                  select route from Route where sender ='".$_SESSION['email']."' AND pen_id = ".$pen_id."
                                                                                                   )
                                   ) AS A";
                                 $result = $conn->query($sql);
@@ -284,7 +284,7 @@
                                         <div class="modal-content modal-content-message">
                                             <div class="modal-header">
                                                 <h5 class="modal-title" id="messageModalLabel'.$i.'"> ';
-                                                    echo $_SESSION['pal_'.$i].' ';
+                                                    echo $_SESSION['pal_name_'.$i].' ';
                                                     echo '
                                                 </h5>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -295,7 +295,7 @@
                                                         <div class="modal-body">
                                                             <!-- PenPal description -->
                                                             <h3>Send a message to  ';
-                                                                echo $_SESSION['pal_'.$i].' ';
+                                                                echo $_SESSION['pal_name_'.$i].' ';
                                                                 echo '
                                                             </h3>
                                                             <div class="mb-3">
@@ -326,24 +326,29 @@
                                       <div class="modal-content">
                                         <div class="modal-header">
                                           <h5 class="modal-title" id="staticBackdropLabel'.$i.'">Confirm deletion of  ';
-                                            echo $_SESSION['pal_'.$i].' ';
+                                            echo $_SESSION['pal_name_'.$i].' ';
                                             
                                             echo '
                                           </h5>
                                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
-                                            <h5>Are you sure you want to remove ';
-                                                echo $_SESSION['pal_'.$i].' ';
-                                                echo '
-                                            </h5>
-                                            <label for="confirmDeletePassword" class="form-label">Enter Password for confirmation</label>
-                                            <input type="password" id="confirmDeletePassword" class="form-control" aria-describedby="passwordHelpBlock">
-                                        </div>
-                                        <div class="modal-footer">
-                                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">I changed my mind</button>
-                                          <button type="button" class="btn btn-primary">Yes, I`m sure</button>
-                                        </div>
+                                        <h5>Are you sure you want to remove ';
+                                            echo $_SESSION['pal_name_'.$i].' '; 
+                                            $_SESSION['delete_me'] = $_SESSION['pal_'.$i];
+                                            echo '
+                                        </h5>
+                                        <form method="POST" action="./php/delete_pal.php">
+                                            <div class="input-group">
+                                                <input type="password" name="confirm_delete" placeholder="Password" class="form-control">
+                                                <button type="submit" class="btn btn-outline-secondary">Confirm identity</button>';
+                                      echo '</div>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">I changed my mind</button>
+                                    </div>
+    
                                       </div>
                                     </div>
                                 </div>

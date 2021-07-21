@@ -35,7 +35,19 @@
         $conn->query($sql);
     } 
 
-    header('Location: http://localhost/PHPfiles/PenPals/index.php');
+    $sql = "SELECT * FROM Penpals where user1 = '".$_SESSION['email']."' or user2 = '".$_SESSION['email']."'";
+    $result = $conn->query($sql);
+
+    if (mysqli_num_rows($result) > 0) {    
+        $i = 1;
+        while($row = $result->fetch_assoc()) {
+            if($row["user2"] <> $email) $_SESSION['pal_'.$i] = $row["user2"];
+                else $_SESSION['pal_'.$i] = $row["user1"];
+            $i++;
+        }
+    }  
+    
+    header('Location: http://localhost/PHPfiles/PenPals/php/login.php');
     exit;
 
     $conn->close();
