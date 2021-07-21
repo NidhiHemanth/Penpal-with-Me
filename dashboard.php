@@ -154,6 +154,12 @@
                 <h1>Welcome,  <?php echo $_SESSION['username'].' ';?>!</h1>
                 <div class="intro">
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio exercitationem odit alias necessitatibus placeat repellendus tempora laborum facere inventore quaerat dicta officiis consequatur, sunt nostrum, amet nam corporis veniam! Voluptate.
+                    <?php 
+                        // echo $_SESSION['pal_1'];
+                        // echo $_SESSION['pal_name_1'];
+                        // echo $_SESSION['pal_2'];
+                        // echo $_SESSION['pal_name_2'];
+                    ?>
                 </div>
                 <button type="button" class="btn btn-secondary btn-lg">Get a PenPal</button>
             </div>
@@ -177,30 +183,23 @@
                 }                
         
                 $i = 1; 
-                while($i<= $_SESSION['pal_'.$i]) {
+                while($i <= $_SESSION['pal_'.$i]) {
                     echo '     
                         <div class="col-sm-10 col-md-6 col-lg-4">                   
                             <div class="card">
                                 <h5 class="card-header">'; echo "Penpal ".$i; echo '</h5>
                                 <div class="card-body"> 
                                     <h5 class="card-title">';
-                                        echo $_SESSION['pal_'.$i].' '; echo ' 
+                                        echo $_SESSION['pal_'.$i].' '; 
+                                        // echo $_SESSION['pal_name_'.$i].' '; 
+                                        // echo $_SESSION['penpal_id_'.$i]; 
+                                        echo ' 
                                     </h5>
                                     <p class="card-text">';
                                     
-                                        $sql = "SELECT pen_id FROM Penpals WHERE (user1 = '".$_SESSION['email']."' AND user2 = '".$_SESSION['pal_'.$i]."') OR (user2 = '".$_SESSION['email']."' AND user1 = '".$_SESSION['pal_'.$i]."');";
-                                        $result = $conn->query($sql);
-                                        
-                                        if (mysqli_num_rows($result) > 0)
-                                        { 
-                                            $row = $result->fetch_assoc();
-                                            $pen_id = $row['pen_id'];
-                                        }
-                                        else echo "hello bye";   
-
                                         $sql = "SELECT time FROM 
                                             (SELECT MAX(whens) AS time, content FROM Messages WHERE route = 
-                                            (SELECT route FROM Route WHERE sender = '".$_SESSION['email']."' AND pen_id = ".$pen_id.")) AS A";
+                                            (SELECT route FROM Route WHERE sender = '".$_SESSION['email']."' AND pen_id = ".$_SESSION['penpal_id_'.$i].")) AS A";
                                         $result = $conn->query($sql);
                                         
                                         if (mysqli_num_rows($result) > 0)
@@ -263,7 +262,8 @@
                                             <div class="modal-content modal-content-message">
                                                 <div class="modal-header">
                                                     <h5 class="modal-title" id="messageModalLabel'.$i.'"> ';
-                                                        echo $_SESSION['pal_'.$i].' ';
+                                                        echo 'PenPal : '.$_SESSION['pal_'.$i].' ';
+                                                        // echo 'PenPal : '.$_SESSION['pal_name_'.$i].' ';
                                                         echo '
                                                     </h5>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -275,6 +275,7 @@
                                                                 <!-- PenPal description -->
                                                                 <h3>Send a message to  ';
                                                                     echo $_SESSION['pal_'.$i].' ';
+                                                                    // echo $_SESSION['pal_name_'.$i].' ';
                                                                     echo '
                                                                 </h3>
                                                                 <div class="mb-3">
@@ -305,13 +306,17 @@
                                         <div class="modal-content">
                                             <div class="modal-header">
                                             <h5 class="modal-title" id="staticBackdropLabel'.$i.'">Confirm deletion of  ';
-                                                echo $_SESSION['pal_'.$i].' '; echo '
+                                                echo $_SESSION['pal_'.$i].' ';
+                                                echo $_SESSION['pal_name_'.$i].' '; 
+                                                echo '
                                             </h5>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
                                                 <h5>Are you sure you want to remove ';
-                                                    echo $_SESSION['pal_'.$i].' '; echo '
+                                                    echo $_SESSION['pal_'.$i].' '; 
+                                                    // echo $_SESSION['pal_name_'.$i].' '; 
+                                                    echo '
                                                 </h5>
                                                 <label for="confirmDeletePassword" class="form-label">Enter Password for confirmation</label>
                                                 <input type="password" id="confirmDeletePassword" class="form-control" aria-describedby="passwordHelpBlock">
