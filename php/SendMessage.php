@@ -1,69 +1,81 @@
 <?php
     session_start();
 
-    $servername = "localhost:3307";
+    $servername = "localhost";
     $username = "root";
     $password = "";
     $dbname = "DBMS";
 
     // confirm_delete
+    $email = $_SESSION['email'];
     $context = $_GET["Message"];
-    $receiver = $_GET["Sends"];
-    
+
+    if($_GET['Sends1']==1) $_SESSION['recievers'] = $_SESSION['pal_1'];
+    if($_GET['Sends2']==2) $_SESSION['recievers'] = $_SESSION['pal_2'];
+    if($_GET['Sends3']==3) $_SESSION['recievers'] = $_SESSION['pal_3'];
+    if($_GET['Sends4']==4) $_SESSION['recievers'] = $_SESSION['pal_4'];
+
+    $receiver = $_SESSION['recievers'];
+
     // Create connection
     $conn = new mysqli($servername, $username, $password, $dbname);
     // Check connection
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
-
     
-    
-    $sql = "select route from route where pen_id = (
-        select pen_id from penpals where user1 IN ('".$_SESSION['email']."', '".$receiver."') 
-        AND user2 IN ('".$_SESSION['email']."', '".$receiver."') 
-                                            ) AND sender = '".$_SESSION['email']."'";
+    $sql = "SELECT route FROM Route 
+            WHERE pen_id = 
+            (SELECT pen_id FROM Penpals WHERE 
+            user1 IN ('$email', '$receiver') 
+            AND user2 IN ('$email', '$receiver')) 
+            AND sender = '$email'";
     
     $result = $conn->query($sql);
     
 
     if (mysqli_num_rows($result) > 0) 
-    {   $row = $result->fetch_assoc();
+    {   
+        $row = $result->fetch_assoc();
         $route = $row['route'];       
-        $sql = "insert into Messages(route,content) values (".$route.",'".$context."')";
+        
+        $sql = "INSERT INTO Messages(route,content) VALUES (".$route.",'".$context."')";
         
         $conn->query($sql);
-       }
-    else {
+    }
+    else 
+    {
+        $sql = "SELECT pen_id FROM Penpals WHERE 
+                (user1 = '$email' AND user2 = '$receiver') 
+                OR (user2 = '$email' AND user1 = '".$receiver."')";
 
-        $sql = "select pen_id from Penpals where (user1 = '".$_SESSION['email']."' AND user2 = '".$receiver."') OR (user2 = '".$_SESSION['username']."' AND user1 = '".$receiver."')";
         $result = $conn->query($sql);
-         if (mysqli_num_rows($result) > 0)
-         { 
+
+        if (mysqli_num_rows($result) > 0)
+        { 
             $row = $result->fetch_assoc();
             $pen_id = $row['pen_id'];
-            $sql = "insert into route (pen_id,sender) values (".$pen_id.",'".$_SESSION['email']."')";
+
+            $sql = "INSERT INTO Route (pen_id,sender) VALUES ('$pen_id','$email')";
             
             $result = $conn->query($sql);
 
-            $sql = "select route from route where pen_id=".$pen_id." AND sender = '".$_SESSION['email']."'";
+            $sql = "SELECT route FROM Route WHERE pen_id = '$pen_id' AND sender = '$email'";
             
             $result = $conn->query($sql);
+            
             $row = $result->fetch_assoc();
             $route = $row['route'];
              
-             $sql = "insert into Messages(route,content) values (".$route.",".$context.")";
+            $sql = "INSERT INTO Messages(route, content) VALUES ('$route','$context')";
              
-             $conn->query($sql);
+            $conn->query($sql);
 
-         }
+        }
     } 
 
- 
-    
-    //header('Location: http://localhost/PHPfiles/PenPals/dashboard.php');
+    header('Location: http://localhost/PHPfiles/PenPals/dashboard.php');
     exit;
-    
 
     $conn->close();
 ?>
