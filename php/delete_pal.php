@@ -12,6 +12,7 @@
     if($_GET['button1']==1) $_SESSION['delete_me'] = $_SESSION['pal_1'];
     if($_GET['button2']==2) $_SESSION['delete_me'] = $_SESSION['pal_2'];
     if($_GET['button3']==3) $_SESSION['delete_me'] = $_SESSION['pal_3'];
+    if($_GET['button4']==4) $_SESSION['delete_me'] = $_SESSION['pal_4'];
 
     // Create connection
     $conn = new mysqli($servername, $username, $password, $dbname);
