@@ -296,74 +296,75 @@
 											echo "No messages sent!";
 										}                 
 
-					echo '</p>
+							  echo '</p>
 									<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#messageModal'.$i.'">
 										Send Message!
 									</button>
-									<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop'.$i.'">Delete Penpal</button>
+									<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop'.$i.'">
+										Delete Penpal
+									</button>
 									<div class="modal fade" id="messageModal'.$i.'" tabindex="-1" aria-labelledby="messageModalLabel'.$i.'" aria-hidden="true">
 										<div class="modal-dialog modal-fullscreen">
 											<div class="modal-content modal-content-message">
 												<div class="modal-header">
 													<h5 class="modal-title" id="messageModalLabel'.$i.'"> ';
 														echo $_SESSION['pal_name'.$i] .' ';
+														// echo 'hello';
 														echo '
 													</h5>
 													<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 												</div>
-												<div class="container">
-													<div class="row d-flex justify-content-center">
-														<div class="col-md-5">
-															<div class="modal-body">
-																<!-- PenPal description -->
-																<h3>Send a message to  ';
-																	echo $_SESSION['pal_name'.$i].' ';
-																	echo '
+												<div class="modal-body">
+													<div class="container">
+														<div class="row d-flex justify-content-center">
+															<div class="col-md-5">
+																<h3>
+																	Send a message to : '.$_SESSION['pal_name'.$i].'
 																</h3>
 																<div class="mb-3">
-																<form method="GET" action="./php/SendMessage.php">
-																<textarea name ="Message" class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
-																<button type="submit" class="btn btn-outline-secondary" name = "Sends'.$i.'" value = "'.$i.'">Send it!</button>
-																</form>
+																	<form method="GET" action="./php/SendMessage.php">
+																		<textarea name ="Message" class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
+																		<button type="submit" class="btn btn-outline-secondary" name = "Sends'.$i.'" value = "'.$i.'">Send it!</button>
+																	</form>
 																</div>
-															
-																</div>
-															</div>    
-														</div>
+															</div>
+														</div>    
 													</div>
-												</div>';
-												echo'
-												<div class="container">
-													<div class="row d-flex justify-content-center">
-														<div class="col-md-5">
-															<div class="msg-body">
-																<h5>';
-																
-																$sql = "select content from (select Max(whens) AS time ,content from Messages where route = (
-																select route from Route where sender ='".$_SESSION['email']."' AND pen_id = ".$pen_id."
-																																)
-																) AS A";
-																
-																$result = $conn->query($sql);
+													<div class="container">
+														<div class="row d-flex justify-content-center">
+															<div class="col-md-5">
+																<div class="msg-body">
+																	<h5>';
+																		$sql = "SELECT content FROM 
+																				(SELECT MAX(whens) AS time, content FROM Messages 
+																				WHERE route = (
+																				SELECT route FROM Route WHERE sender ='".$_SESSION['email']."' 
+																				AND pen_id = ".$pen_id.")
+																				) AS A";
+																		
+																		$result = $conn->query($sql);
 															
-															if (mysqli_num_rows($result) > 0)
-															{    
-																$row = $result->fetch_assoc();                                                        
-																$Lmessage = $row['content'];
-																if(!is_NULL($Lmessage)) echo $Lmessage;
-																else echo "You are sending your first message!"; 
-															}
-															else echo "You are sending your first message!"; 
-																
-																echo '</h5>
-																<div></div>
+																		if (mysqli_num_rows($result) > 0)
+																		{    
+																			$row = $result->fetch_assoc();                                                        
+																			$Lmessage = $row['content'];
+
+																			if(!is_NULL($Lmessage)) 
+																				echo $Lmessage;
+																			else 
+																				echo "You are sending your first message!"; 
+																		}
+																		else 
+																			echo "You are sending your first message!"; 
+																		echo '
+																	</h5>
+																</div>
 															</div>
 														</div>
 													</div>
 												</div>
 												
 												<div class="modal-footer modal-footer-message">
-												
 													<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Back to Dashboard</button>
 												</div>
 											</div>
@@ -373,36 +374,36 @@
 										<div class="modal-dialog">
 										<div class="modal-content">
 											<div class="modal-header">
-											<h5 class="modal-title" id="staticBackdropLabel'.$i.'">Confirm deletion of  ';
-												echo $_SESSION['pal_name_'.$i].' ';
-												
-												echo '
-											</h5>
-											<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+												<h5 class="modal-title" id="staticBackdropLabel'.$i.'">Confirm deletion of  ';
+													echo $_SESSION['pal_name_'.$i].' ';
+													
+													echo '
+												</h5>
+												<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 											</div>
 											<div class="modal-body">
-											<h5>Are you sure you want to remove ';
-												echo $_SESSION['pal_name_'.$i].' ';                                          
-												echo '
-											</h5>
-											<form method="GET" action="./php/delete_pal.php">
-												<div class="input-group">
-													<input type="password" name="confirm_delete" placeholder="Password" class="form-control">
-													<button type="submit" class="btn btn-outline-secondary" name = "button'.$i.'" value = "'.$i.'">
-													Confirm identity
-													</button> 
-												</div>
-											</form>
-										</div>
-										<div class="modal-footer">
-											<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">I changed my mind</button>
-										</div>
-		
+												<h5>Are you sure you want to remove ';
+													echo $_SESSION['pal_name_'.$i].' ';                                          
+													echo '
+												</h5>
+												<form method="GET" action="./php/delete_pal.php">
+													<div class="input-group">
+														<input type="password" name="confirm_delete" placeholder="Password" class="form-control">
+														<button type="submit" class="btn btn-outline-secondary" name = "button'.$i.'" value = "'.$i.'">
+															Confirm identity
+														</button> 
+													</div>
+												</form>
+											</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">I changed my mind</button>
+											</div>
 										</div>
 									</div>
 								</div>
 							</div>
-						</div>';
+						</div>
+					</div>';
 
 						$i++;
 					}
