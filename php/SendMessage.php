@@ -1,7 +1,7 @@
 <?php
     session_start();
 
-    $servername = "localhost";
+    $servername = "localhost:3307";
     $username = "root";
     $password = "";
     $dbname = "DBMS";
@@ -23,13 +23,17 @@
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
-    
+
+    $sql = "SELECT pen_id FROM Penpals WHERE (user1 = '".$email."' AND user2 = '".$receiver."') OR (user2 = '".$email."' AND user1 = '".$receiver."');";
+    $result = $conn->query($sql);
+    $row = $result->fetch_assoc();
+    $pen_id = $row['pen_id'];
+
+
     $sql = "SELECT route FROM Route 
-            WHERE pen_id = 
-            (SELECT pen_id FROM Penpals WHERE 
-            user1 IN ('$email', '$receiver') 
-            AND user2 IN ('$email', '$receiver')) 
+            WHERE pen_id = '$pen_id' 
             AND sender = '$email'";
+
     
     $result = $conn->query($sql);
     
@@ -45,9 +49,7 @@
     }
     else 
     {
-        $sql = "SELECT pen_id FROM Penpals WHERE 
-                (user1 = '$email' AND user2 = '$receiver') 
-                OR (user2 = '$email' AND user1 = '".$receiver."')";
+        $sql = "SELECT pen_id FROM Penpals WHERE (user1 = '".$email."' AND user2 = '".$receiver."') OR (user2 = '".$email."' AND user1 = '".$receiver."');";
 
         $result = $conn->query($sql);
 

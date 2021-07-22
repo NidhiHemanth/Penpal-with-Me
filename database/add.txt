@@ -23,3 +23,10 @@ select content from (select Max(whens) AS time ,content from messages where rout
                                   select route from route where sender ='".$_SESSION['email']."' AND pen_id = ".$pen_id."
                                                                                                   )
                                   ) AS A
+
+
+SELECT time FROM (SELECT MAX(whens) AS time, content FROM Messages 
+																				WHERE route = (
+																				SELECT route FROM Route WHERE sender ='nidhhih.is19@bmsce.ac.in' 
+																				AND pen_id = "1")
+																				) AS A;
