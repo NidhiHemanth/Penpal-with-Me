@@ -308,7 +308,7 @@
 											<div class="modal-content modal-content-message">
 												<div class="modal-header">
 													<h5 class="modal-title" id="messageModalLabel'.$i.'"> ';
-														echo $_SESSION['pal_name'.$i] .' ';
+														echo '@'.$_SESSION['pal_name'.$i] .' ';
 														// echo 'hello';
 														echo '
 													</h5>
@@ -318,13 +318,13 @@
 													<div class="container">
 														<div class="row d-flex justify-content-center">
 															<div class="col-md-5">
-																<h3>
+																<h3 class="msg-header">
 																	Send a message to : '.$_SESSION['pal_name'.$i].'
 																</h3>
 																<div class="mb-3">
 																	<form method="GET" action="./php/SendMessage.php">
 																		<textarea name ="Message" class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
-																		<button type="submit" class="btn btn-outline-secondary" name = "Sends'.$i.'" value = "'.$i.'">Send it!</button>
+																		<button type="submit" class="btn btn-outline-secondary sub-msg" name = "Sends'.$i.'" value = "'.$i.'">Send it!</button>
 																	</form>
 																</div>
 															</div>
