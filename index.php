@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="./style/login.css">
 </head>
 <body>
-    <h1 id="logo">Pen-Pals</h1>
+    <h1 id="logo">Penpal with Me</h1>
     <h3 id="slogan"> ~ Make new friends ~ </h3>
 
     <div class="container-own" id="container-own">

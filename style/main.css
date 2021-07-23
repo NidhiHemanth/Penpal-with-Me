@@ -4,19 +4,51 @@
 }
 
 div.header {
-    background-color: brown;
-    height: 10rem;
+    background-color: rgb(140, 169, 248);
+    height: 4rem;
     margin-bottom: 2rem;
+}
+
+.app-logo {
+    font-family: 'Carter One', cursive;
+    font-size: 2rem !important;
+    font-style: italic;
+    font-size: larger;
+    color: white;
+    padding-top: 5px;
+    padding-left: 20px;
+    font-weight: 600;
+    color: rgb(4, 15, 66);
+}
+
+.card-header {
+    color: white;
+    background-color: rgba(71, 119, 231, 0.876) !important;
+}
+
+.btn-primary {
+    background-color: rgb(10, 19, 100) !important;
+}
+
+.btn-secondary {
+    color: black !important;
+    background-color: rgba(222, 223, 235, 0.87) !important;
+}
+
+.card-body {
+    background-color: rgb(255, 255, 255);
 }
 
 .first-card {
     background-color: #ffad8f7c;
     padding: 1.5rem;
-    margin-bottom: 2rem;
+    margin-bottom: 3rem;
+    height: 23rem;
 }
 
 div.intro {
     margin-bottom: 1rem;
+    font-size: 1.5rem !important;
 }
 
 div.new-penpal {
@@ -80,6 +112,7 @@ div.new-penpal {
 
 .setting {
     position: absolute;
+    border-radius: 15px;
     right: 10px;
     top: 10px;
 }
@@ -88,4 +121,18 @@ div.new-penpal {
     position: relative;
     top: -40px;
     float: right;
+}
+
+.welcome-container {
+    /* background: url('../assets/bg-welcome.jpg'); */
+    background-image: linear-gradient(to bottom, rgba(7, 34, 26, 0.007), rgba(27, 46, 87, 0.73)), url("../assets/bg-welcome.jpg");
+    color: white;
+    text-align:center !important;
+}
+
+.welcome-row {
+    margin-top: 40px !important;
+    background-color: rgba(0, 0, 0, 0.349);
+    padding: 1rem;
+    margin-bottom: 20px;
 }

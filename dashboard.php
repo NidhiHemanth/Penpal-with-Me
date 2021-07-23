@@ -7,7 +7,7 @@
 		exit;
 	}
 
-	$servername = "localhost:3307";
+	$servername = "localhost";
 	$username = "root";
 	$password = "";
 	$dbname = "DBMS";
@@ -30,9 +30,10 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 </head>
-<body>
+<body style="background-color: rgb(230, 235, 245)">
 	<div class="container-fluid header">
-        <button type="button" class="btn btn-warning setting" data-bs-toggle="modal" data-bs-target="#settingModal">
+		<div class="app-logo">Penpal with Me</div>
+        <button type="button" class="btn setting" data-bs-toggle="modal" style="background-color:#ffffffdc" data-bs-target="#settingModal">
 			<i class="fa fa-gear fa-spin" style="font-size:24px"></i>
 		</button>
         <div class="modal fade" id="settingModal" tabindex="-1" aria-labelledby="settingModalLabel" aria-hidden="true">
@@ -164,27 +165,27 @@
 		</div>
 	</div>
 
-    <div class="container first-card">
-		<div class="row d-flex justify-content-center">
+    <div class="container first-card welcome-container">
+		<div class="row d-flex justify-content-center welcome-row">
 			<div class="col-md-8">
 				<h1>Welcome, <?php echo $_SESSION['username'];?>!</h1>
 				<div class="intro">
 					It's time to check up on your penpals and see if they have responded! Or are you looking for a new one? If so, click the button below!
 				</div>
-				<form action = "./php/Addpenpal.php" method="POST">
-			        <button type="submit" class="btn btn-secondary btn-lg" 
-						name="AddPenpal"
-                    	class="button" 
-						value="Get a Penpal!"
-					>
-						Get a Penpal!
-					</button>                        
-		        </form>
             </div>
 		</div>
+		<form action = "./php/Addpenpal.php" method="POST">
+			<button type="submit" class="btn btn-secondary btn-lg" 
+				name="AddPenpal"
+				class="button" 
+				value="Get a Penpal!"
+			>
+				Get a Penpal!
+			</button>                        
+		</form>
 	</div>
    
-    <div class="container">
+    <div class="container" style="margin-top: 2rem;">
     	<div class="row">
         	<?php error_reporting(0);
            
@@ -194,7 +195,7 @@
 				{
 					echo '     
 						<div class="col-sm-10 col-md-6 col-lg-4">                   
-							<div class="card">
+							<div class="card" background-color: rgb(0, 0, 0);>
 								<h5 class="card-header">'; echo "Penpal ".$i;echo '</h5>
 								<div class="card-body"> 
 									<h5 class="card-title">';
