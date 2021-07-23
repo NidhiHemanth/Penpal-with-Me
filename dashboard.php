@@ -206,6 +206,7 @@
 										echo $row['name'].'
 									</h5>
 									<p class="card-text">';
+
 										$sql = "SELECT pen_id FROM Penpals WHERE (user1 = '".$_SESSION['email']."' AND user2 = '".$_SESSION['pal_'.$i]."') OR (user2 = '".$_SESSION['email']."' AND user1 = '".$_SESSION['pal_'.$i]."');";
 										$result = $conn->query($sql);
 
@@ -215,19 +216,64 @@
 											$pen_id = $row['pen_id'];
 
 											$sql = "SELECT time FROM 
+											(SELECT MAX(whens) AS time, content FROM Messages 
+											WHERE route = (
+											SELECT route FROM Route WHERE sender ='".$_SESSION['email']."' 
+											AND pen_id = ".$pen_id.")
+											) AS A";
+											
+											$result = $conn->query($sql);
+											$row = $result->fetch_assoc();                                                        
+											$time1 =  $row['time'];
+												
+											$sql = "SELECT time FROM 
 													(SELECT MAX(whens) AS time, content FROM Messages 
 													WHERE route = (
-													SELECT route FROM Route WHERE 
-													sender = '".$_SESSION['email']."' AND pen_id = ".$pen_id.")
+													SELECT route FROM Route WHERE sender ='".$_SESSION['pal_'.$i]."' 
+													AND pen_id = ".$pen_id.")
 													) AS A";
 
 											$result = $conn->query($sql);
-							
-											if (mysqli_num_rows($result) > 0)
-											{    
-												$row = $result->fetch_assoc();                                                        
-												$date1 = $row['time']; 
+											$row = $result->fetch_assoc();                                                        
+											$time2 =  $row['time'];
+											
+											if(is_NULL($time1) && is_NULL($time2))
+											{ 
+												$L = "System"; 
+												$date1=NULL;
+											}
+											else if(is_NULL($time1) && !is_NULL($time2)) 
+											{
+												$LTime = $_SESSION['pal_'.$i]; 
+												$L = $_SESSION['pal_name'.$i]; 
+												$date1 = $time1;
+											}
+											else if(!is_NULL($time1) && is_NULL($time2)) 
+											{
+												$LTime = $_SESSION['email'];
+												$L = "you"; 
+												$date1 = $time2;
+											}
 
+											else if($time1>$time2)
+											{
+												$LTime = $_SESSION['email'];
+												$L = "you";
+												$date1=$time1;
+											}
+											else 
+											{
+												$LTime = $_SESSION['pal_'.$i]; 
+												$L = $_SESSION['pal_name'.$i]; 
+												$date1 = $time2;
+											}
+											
+											if(is_NULL($date1))
+											{
+												echo "No messages sent!";
+											}
+											else
+											{
 												$sql = "SELECT TIMESTAMPDIFF(SECOND,'".$date1."', NOW()) AS B";                                
 												$result = $conn->query($sql);
 
@@ -261,8 +307,6 @@
 						
 																	}
 																	else $toprint = $months." months";                           
-																
-						
 															}
 															else 
 																$toprint = $days." days";   
@@ -287,10 +331,7 @@
 													echo "No messages sent!";
 												}
 											}
-											else
-											{
-												echo "No messages sent!";
-											}
+											
 										}
 										else
 										{
@@ -336,60 +377,10 @@
 															<div class="col-md-5">
 																<div class="msg-body">
 																	<div>';
-
-																																		
-																		$sql = "SELECT time FROM 
-																				(SELECT MAX(whens) AS time, content FROM Messages 
-																				WHERE route = (
-																				SELECT route FROM Route WHERE sender ='".$_SESSION['email']."' 
-																				AND pen_id = ".$pen_id.")
-																				) AS A";
-
-																		$result = $conn->query($sql);
-																		$row = $result->fetch_assoc();                                                        
-																		$time1 =  $row['time'];
-																		
-																		$sql = "SELECT time FROM 
-																				(SELECT MAX(whens) AS time, content FROM Messages 
-																				WHERE route = (
-																				SELECT route FROM Route WHERE sender ='".$_SESSION['pal_'.$i]."' 
-																				AND pen_id = ".$pen_id.")
-																				) AS A";
-																		
-																		$result = $conn->query($sql);
-																		$row = $result->fetch_assoc();                                                        
-																		$time2 =  $row['time'];
-																		
-																		if(is_NULL($time1) && is_NULL($time2)) 
-																		{
-																			$L = "System";
-																		}
-																		else if(is_NULL($time1) && !is_NULL($time2)) 
-																		{
-																			$LTime = $_SESSION['pal_'.$i]; 
-																			$L = $_SESSION['pal_name'.$i];
-																		}
-																		else if(!is_NULL($time1) && is_NULL($time2)) 
-																		{
-																			$LTime = $_SESSION['email'];
-																			$L = "you";
-																		}
-
-																		else if($time1>$time2)
-																		{
-																			$LTime = $_SESSION['email'];
-																			$L = "you";
-																		}
-																		else 
-																		{
-																			$LTime = $_SESSION['pal_'.$i]; 
-																			$L = $_SESSION['pal_name'.$i];
-																		}
-																																				
-																		$sql = "SELECT content from Messages where whens = 
+																		$sql = "SELECT content FROM Messages WHERE whens = 
 																				(SELECT MAX(whens) AS time FROM Messages 
-																				WHERE route = 
-																				(SELECT route FROM Route 
+																				WHERE route = ( 
+																				SELECT route FROM Route 
 																				WHERE sender ='".$LTime."' AND pen_id = ".$pen_id."))";
 
 																		$result = $conn->query($sql);
