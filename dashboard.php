@@ -207,7 +207,11 @@
 									</h5>
 									<p class="card-text">';
 
-										$sql = "SELECT pen_id FROM Penpals WHERE (user1 = '".$_SESSION['email']."' AND user2 = '".$_SESSION['pal_'.$i]."') OR (user2 = '".$_SESSION['email']."' AND user1 = '".$_SESSION['pal_'.$i]."');";
+										$sql = "SELECT pen_id FROM Penpals 
+												WHERE (user1 = '".$_SESSION['email']."' 
+												AND user2 = '".$_SESSION['pal_'.$i]."') 
+												OR (user2 = '".$_SESSION['email']."' 
+												AND user1 = '".$_SESSION['pal_'.$i]."');";
 										$result = $conn->query($sql);
 
 										if (mysqli_num_rows($result) > 0)
@@ -216,11 +220,11 @@
 											$pen_id = $row['pen_id'];
 
 											$sql = "SELECT time FROM 
-											(SELECT MAX(whens) AS time, content FROM Messages 
-											WHERE route = (
-											SELECT route FROM Route WHERE sender ='".$_SESSION['email']."' 
-											AND pen_id = ".$pen_id.")
-											) AS A";
+													(SELECT MAX(whens) AS time, content FROM Messages 
+													WHERE route = (
+													SELECT route FROM Route WHERE sender ='".$_SESSION['email']."' 
+													AND pen_id = ".$pen_id.")
+													) AS A";
 											
 											$result = $conn->query($sql);
 											$row = $result->fetch_assoc();                                                        
@@ -229,7 +233,7 @@
 											$sql = "SELECT time FROM 
 													(SELECT MAX(whens) AS time, content FROM Messages 
 													WHERE route = (
-													SELECT route FROM Route WHERE sender ='".$_SESSION['pal_'.$i]."' 
+													SELECT route FROM Route WHERE sender ='".$_SESSION['email']."' 
 													AND pen_id = ".$pen_id.")
 													) AS A";
 
@@ -259,7 +263,7 @@
 											{
 												$LTime = $_SESSION['email'];
 												$L = "you";
-												$date1=$time1;
+												$date1 = $time1;
 											}
 											else 
 											{
@@ -331,7 +335,6 @@
 													echo "No messages sent!";
 												}
 											}
-											
 										}
 										else
 										{
