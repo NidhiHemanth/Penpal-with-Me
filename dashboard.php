@@ -245,10 +245,11 @@
 												$time2 =  $row['time'];
 												
 												
-												if(is_NULL($time1)&&is_NULL($time2)){ $L = "System"; $date1=NULL;}
-												else if(is_NULL($time1)&&!is_NULL($time2)) {$LTime = $_SESSION['pal_'.$i]; $L = $_SESSION['pal_name'.$i]; $date1 = $time1;}
+												
+												if(is_NULL($time1)&&is_NULL($time2)){ $L = "System"; $date1=false;}
+												else if(is_NULL($time1)&&!is_NULL($time2)) {$LTime = $_SESSION['pal_'.$i]; $L = $_SESSION['pal_name'.$i]; $date1 = $time2;}
 												else if(!is_NULL($time1)&&is_NULL($time2)) {$LTime = $_SESSION['email'];
-													$L = "you"; $date1 = $time2;}
+													$L = "you"; $date1 = $time1;}
 
 												else if($time1>$time2)
 												{
@@ -260,7 +261,7 @@
 																
 												
 
-											if(is_NULL($date1))echo "No messages sent!";
+											if(!$date1)echo "No messages sent!";
 											else
 											{
 												$sql = "SELECT TIMESTAMPDIFF(SECOND,'".$date1."', NOW()) AS B";                                
