@@ -200,13 +200,14 @@
 									<h5 class="card-title">';
 										$sql = "SELECT name FROM Users WHERE email = '".$_SESSION['pal_'.$i]."'";
 										$result=$conn->query($sql);
+										if (mysqli_num_rows($result) > 0)
+										{
 										$row = $result->fetch_assoc();
-										$_SESSION['pal_name'.$i] = $row['name'];
-																
-										echo $row['name'].'
+										$_SESSION['pal_name'.$i] = $row['name'];																
+										}echo $row['name'].'
 									</h5>
 									<p class="card-text">';
-
+										
 										$sql = "SELECT pen_id FROM Penpals WHERE (user1 = '".$_SESSION['email']."' AND user2 = '".$_SESSION['pal_'.$i]."') OR (user2 = '".$_SESSION['email']."' AND user1 = '".$_SESSION['pal_'.$i]."');";
 										$result = $conn->query($sql);
 
