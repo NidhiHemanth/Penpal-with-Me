@@ -7,7 +7,7 @@
 		exit;
 	}
 
-	$servername = "localhost";
+	$servername = "localhost:3307";
 	$username = "root";
 	$password = "";
 	$dbname = "DBMS";
@@ -169,7 +169,7 @@
 			<div class="col-md-8">
 				<h1>Welcome, <?php echo $_SESSION['username'];?>!</h1>
 				<div class="intro">
-					Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio exercitationem odit alias necessitatibus placeat repellendus tempora laborum facere inventore quaerat dicta officiis consequatur, sunt nostrum, amet nam corporis veniam! Voluptate.
+					It's time to check up on your penpals and see if they have responded! Or are you looking for a new one? If so, click the button below!
 				</div>
 				<form action = "./php/Addpenpal.php" method="POST">
 			        <button type="submit" class="btn btn-secondary btn-lg" 
