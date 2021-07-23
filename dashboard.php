@@ -7,7 +7,7 @@
 		exit;
 	}
 
-	$servername = "localhost:3307";
+	$servername = "localhost";
 	$username = "root";
 	$password = "";
 	$dbname = "DBMS";
@@ -369,11 +369,11 @@
 														<div class="row d-flex justify-content-center">
 															<div class="col-md-5">
 																<div class="msg-body">
-																	<h5>';
+																	<div>';
 
 																																		
 																																																					
-																		$sql = "SELECT content from messages where whens = (
+																		$sql = "SELECT content from Messages where whens = (
 																			SELECT MAX(whens) AS time FROM Messages WHERE route = ( 
 																			SELECT route FROM Route WHERE sender ='".$LTime."' AND pen_id = ".$pen_id."
 																														)
@@ -384,19 +384,19 @@
 															
 																		if (mysqli_num_rows($result) > 0)
 																		{    
-																			echo "From ".$L.",";
+																			echo "<div class='msg-sender'>From ".$L.",</div>";
 																			$row = $result->fetch_assoc();                                                        
 																			$Lmessage = $row['content'];
 																		
 																			if(!is_NULL($Lmessage)) 
-																				echo "<BR>".$Lmessage;
+																				echo "<div class='msg-content'>".$Lmessage.'</div>';
 																			else 
 																				echo "You are sending your first message!"; 
 																		}
 																		else 
 																			echo "You are sending your first message!"; 
 																		echo '
-																	</h5>
+																	</div>
 																</div>
 															</div>
 														</div>

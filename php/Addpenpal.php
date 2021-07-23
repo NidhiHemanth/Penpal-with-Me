@@ -85,13 +85,11 @@
             while($row = $result->fetch_assoc()) {
                 if($row["user2"] <> $email) 
                 {  
-                    if($row["user1"] <> $email)
-                        $_SESSION['pal_'.$i] = $row["user2"];
+                    $_SESSION['pal_'.$i] = $row["user2"];
                 }
                 else
                 {
-                    if($row["user2"] <> $email)
-                        $_SESSION['pal_'.$i] = $row["user1"];
+                    $_SESSION['pal_'.$i] = $row["user1"];
                 } 
                 $i++;
             }
