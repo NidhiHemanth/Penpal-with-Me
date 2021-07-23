@@ -22,16 +22,18 @@ WHERE email = 'meganraj251@gmail.com');
 
 SELECT * FROM potentials;
 
-create view filtered AS select * from potentials where !(email in (select user1 from penpals where user2 = 'meganraj251@gmail.com') 
-Or email in (select user2 from penpals where user1 ='meganraj251@gmail.com'));
+CREATE VIEW filtered AS 
+SELECT * FROM potentials WHERE 
+!(email IN (SELECT user1 FROM penpals WHERE user2 = 'meganraj251@gmail.com') 
+OR email IN (SELECT user2 FROM penpals WHERE user1 ='meganraj251@gmail.com'));
 
 SELECT email FROM filtered
 WHERE counters =
 (SELECT MAX(counters) FROM filtered) 
 LIMIT 1;
 
-drop view potentials;
-drop view my_pals;
-drop view filtered;
+DROP VIEW potentials;
+DROP VIEW my_pals;
+DROP VIEW filtered;
 
 INSERT INTO Penpals (user1, user2) VALUES (X,Y);

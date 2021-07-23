@@ -42,7 +42,6 @@ INSERT INTO Messages(route,content) VALUES
 (1,'dont ignore pls'),
 (2,'smh');
 
-
 INSERT INTO Interests VALUES
 ('meganraj251@gmail.com','gaming'),
 ('meganraj251@gmail.com','knit'),

@@ -14,7 +14,7 @@
         die("Connection failed: " . $conn->connect_error);
     }
     
-    $sql ="select * from Penpals where user1 ='".$_SESSION['email']."' OR user2 ='".$_SESSION['email']."'";
+    $sql ="SELECT * FROM Penpals WHERE user1 ='".$_SESSION['email']."' OR user2 ='".$_SESSION['email']."'";
                     
     $result = $conn->query($sql);
 
@@ -74,24 +74,30 @@
         
         $sql="DROP VIEW filtered";
         $conn->query($sql);
-
-    }
-                      
-    $sql = "SELECT * FROM Penpals where user1 = '".$_SESSION['email']."' or user2 = '".$_SESSION['email']."'";
-    $result = $conn->query($sql);
-    
-    $_SESSION['numOfPenpals'] = mysqli_num_rows($result);
                 
-    if (mysqli_num_rows($result) > 0) {    
-        $i = 1;
-        while($row = $result->fetch_assoc()) {
-            if($row["user2"] <> $email) $_SESSION['pal_'.$i] = $row["user2"];
-                else $_SESSION['pal_'.$i] = $row["user1"];
-            $i++;
-        }
-    }  
+        $sql = "SELECT * FROM Penpals where user1 = '".$_SESSION['email']."' or user2 = '".$_SESSION['email']."'";
+        $result = $conn->query($sql);
+
+        $_SESSION['numOfPenpals'] = mysqli_num_rows($result);
+        
+        if (mysqli_num_rows($result) > 0) {    
+            $i = 1;
+            while($row = $result->fetch_assoc()) {
+                if($row["user2"] <> $email) 
+                {  
+                    if($row["user1"] <> $email)
+                        $_SESSION['pal_'.$i] = $row["user2"];
+                }
+                else
+                {
+                    if($row["user2"] <> $email)
+                        $_SESSION['pal_'.$i] = $row["user1"];
+                } 
+                $i++;
+            }
+        }  
+    }
     
     header('Location: http://localhost/PHPfiles/PenPals/dashboard.php');
     exit;
-    
 ?>
