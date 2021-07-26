@@ -20,11 +20,11 @@ etc..
 ## Concepts covered
 This application was built as part of the Database Management course work, and aims at implementing CRUD operations in MySQL.
 
-A lot of efforts were also consumed in preparing the perfect database structure. Those steps are:
-(1) Requirement analysis
-(2) ER diagram making
-(3) Reducing ER diagram to relational schemas
-(4) Checking if the schemas were in 3NF form
-(5) Decomposing the problematic relations to 3NF
-(6) Finding the highest normal form of all the relations
-(7) Writing SQL queries to create the relations etc..
+A lot of efforts were also consumed in preparing the perfect database structure. Those steps are: <br/>
+(1) Requirement analysis <br/>
+(2) ER diagram making <br/>
+(3) Reducing ER diagram to relational schemas <br/>
+(4) Checking if the schemas were in 3NF form <br/>
+(5) Decomposing the problematic relations to 3NF <br/>
+(6) Finding the highest normal form of all the relations <br/>
+(7) Writing SQL queries to create the relations etc.. 
