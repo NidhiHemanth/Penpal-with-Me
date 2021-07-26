@@ -4,7 +4,7 @@
     session_destroy();  //destroy the session
     
     //to redirect back to "index.php" after logging out
-    header('Location: http://localhost/PHPfiles/PenPals/index.php');
+    header('Location: http://penpal-with-me.epizy.com/index.php');
     // header('refresh: 1');
     exit();
 ?>

@@ -1,10 +1,10 @@
 <?php
     session_start();
 
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "DBMS";
+    $servername = "sql107.epizy.com";
+    $username = "epiz_29240958";
+    $password = "ZMqd5XG3XFlgIo5";
+    $dbname = "epiz_29240958_DBMS";
 
     // confirm_delete
     $email = $_SESSION['email'];
@@ -76,7 +76,7 @@
         }
     } 
 
-    header('Location: http://localhost/PHPfiles/PenPals/dashboard.php');
+    header('Location: http://penpal-with-me.epizy.com/dashboard.php');
     exit;
 
     $conn->close();

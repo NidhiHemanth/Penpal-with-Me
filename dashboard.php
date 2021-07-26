@@ -3,14 +3,14 @@
 	session_start();
 
 	if(!isset($_SESSION['logged_in'])) {
-		header('Location: http://localhost/PHPfiles/PenPals/index.php');
+		header('Location: http://penpal-with-me.epizy.com/index.php');
 		exit;
 	}
 
-	$servername = "localhost";
-	$username = "root";
-	$password = "";
-	$dbname = "DBMS";
+	$servername = "sql107.epizy.com";
+	$username = "epiz_29240958";
+	$password = "ZMqd5XG3XFlgIo5";
+	$dbname = "epiz_29240958_DBMS";
 
 	// Create connection
 	$conn = new mysqli($servername, $username, $password, $dbname);

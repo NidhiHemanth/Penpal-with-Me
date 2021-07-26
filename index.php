@@ -2,7 +2,7 @@
     session_start();
 
     if(isset($_SESSION['logged_in'])) {
-        header('Location: http://localhost/PHPfiles/PenPals/dashboard.php');
+        header('Location: http://penpal-with-me.epizy.com/dashboard.php');
         exit;
     }
 ?>

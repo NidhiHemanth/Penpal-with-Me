@@ -1,10 +1,10 @@
 <?php
     session_start();
 
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "DBMS";
+    $servername = "sql107.epizy.com";
+    $username = "epiz_29240958";
+    $password = "ZMqd5XG3XFlgIo5";
+    $dbname = "epiz_29240958_DBMS";
 
     // email, password
     $rem = $_POST["remember"];
@@ -54,12 +54,12 @@
         } 
     
         // echo "Success";
-        header('Location: http://localhost/PHPfiles/PenPals/dashboard.php');
+        header('Location: http://penpal-with-me.epizy.com/dashboard.php');
         exit;
     } 
 
     // echo "Fail";
-    header('Location: http://localhost/PHPfiles/PenPals/index.php');
+    header('Location: http://penpal-with-me.epizy.com/index.php');
     exit;
 
     $conn->close();

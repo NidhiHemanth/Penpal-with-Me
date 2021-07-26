@@ -1,10 +1,10 @@
 <?php
     session_start();
 
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "DBMS";
+    $servername = "sql107.epizy.com";
+    $username = "epiz_29240958";
+    $password = "ZMqd5XG3XFlgIo5";
+    $dbname = "epiz_29240958_DBMS";
 
     // name, email, password
     $name = $_POST["name"];
@@ -38,11 +38,11 @@
         $sql = "INSERT INTO `Languages` (`email`) VALUES ('$email')";
         $result = $conn->query($sql);
 
-        // header('Location: http://localhost/PHPfiles/PenPals/home.php');
+        // header('Location: http://penpal-with-me.epizy.com/index.php');
         // exit;
     }
 
-    header('Location: http://localhost/PHPfiles/PenPals/index.php');
+    header('Location: http://penpal-with-me.epizy.com/index.php');
     exit;
 
     $conn->close();
